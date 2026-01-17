@@ -33,6 +33,7 @@
         linear-gradient(180deg, #05080c 0%, #070b10 30%, #070b10 100%);
       font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", Roboto, Arial, sans-serif;
       letter-spacing:-0.2px;
+      overflow-x:hidden;
     }
 
     a{color:inherit; text-decoration:none}
@@ -51,18 +52,20 @@
       height:100%;
       max-width:var(--max);
       margin:0 auto;
-      padding:0 18px;
+      padding:0 14px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
+      flex-wrap:nowrap;
     }
 
     .brand{
       display:flex;
       align-items:center;
       gap:10px;
-      min-width: 280px;
+      min-width: 0;
+      flex: 0 1 auto;
     }
     .brand-mark{
       width:38px;
@@ -74,32 +77,48 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      font-weight:800;
+      font-weight:900;
       color: rgba(255,255,255,0.88);
+      flex: 0 0 auto;
     }
     .brand-title{
       display:flex;
       flex-direction:column;
-      line-height:1.1;
+      line-height:1.15;
+      min-width:0;
     }
     .brand-title strong{
-      font-size:14px;
-      font-weight:800;
+      font-size:13px;
+      font-weight:900;
       color: rgba(255,255,255,0.92);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 42vw;
     }
     .brand-title span{
       font-size:12px;
       color: var(--muted2);
       margin-top:3px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 42vw;
     }
 
     nav{
       display:flex;
       align-items:center;
       gap:8px;
-      flex-wrap:wrap;
+      flex: 1 1 auto;
       justify-content:flex-end;
+      overflow-x:auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width:none;
+      min-width:0;
     }
+    nav::-webkit-scrollbar{display:none}
+
     .nav-link{
       padding:9px 12px;
       border-radius:999px;
@@ -111,6 +130,7 @@
       cursor:pointer;
       user-select:none;
       white-space:nowrap;
+      flex: 0 0 auto;
     }
     .nav-link:hover{
       transform: translateY(-1px);
@@ -124,10 +144,11 @@
       background: rgba(170,200,255,0.14);
       color: rgba(255,255,255,0.94);
       font-size:13px;
-      font-weight:800;
+      font-weight:900;
       cursor:pointer;
       transition: transform 0.15s ease, background 0.15s ease, border 0.15s ease;
       white-space:nowrap;
+      flex: 0 0 auto;
     }
     .btn:hover{
       transform: translateY(-1px);
@@ -138,13 +159,7 @@
     main{
       max-width:var(--max);
       margin:0 auto;
-      padding: 18px 18px 70px;
-    }
-
-    section{
-      margin-top:24px;
-      padding-top: calc(var(--headerH) + 16px);
-      margin-top: calc(-1 * (var(--headerH) + 16px));
+      padding: 18px 14px 70px;
     }
 
     .panel{
@@ -154,13 +169,13 @@
       box-shadow: var(--shadow);
       overflow:hidden;
     }
-    .panel-inner{ padding: 26px 22px; }
+    .panel-inner{ padding: 26px 18px; }
 
     .sec-title{
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
-      gap:16px;
+      gap:14px;
       padding: 0 2px 14px;
     }
     .sec-title h2{
@@ -176,10 +191,10 @@
       text-align:right;
     }
 
-    /* HERO: 포스터 넣는 자리 */
+    /* HERO */
     .hero{
       position:relative;
-      padding: 26px 22px;
+      padding: 26px 18px;
     }
     .hero-wrap{
       display:grid;
@@ -234,9 +249,16 @@
       border-radius: 16px;
       border:1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.035);
+      min-width:0;
     }
     .meta .k{ font-size:12px; color: var(--muted2); margin-bottom:6px; }
-    .meta .v{ font-size:14px; color: rgba(255,255,255,0.92); line-height:1.35; font-weight:800; }
+    .meta .v{
+      font-size:14px;
+      color: rgba(255,255,255,0.92);
+      line-height:1.35;
+      font-weight:900;
+      word-break:keep-all;
+    }
 
     .poster{
       border-radius: 18px;
@@ -252,7 +274,7 @@
     .poster img{
       width:100%;
       height:100%;
-      object-fit: contain; /* 포스터 전체 보이게 */
+      object-fit: contain;
       object-position:center;
     }
 
@@ -277,15 +299,16 @@
     .solo-photo img{
       width:100%;
       height:100%;
-      max-height: 460px;
-      object-fit: contain; /* 얼굴 잘림 방지 */
+      max-height: 480px;
+      object-fit: contain;
       object-position: center;
     }
     .solo-info{
-      padding: 18px 10px;
+      padding: 18px 6px;
       display:flex;
       flex-direction:column;
       justify-content:center;
+      min-width:0;
     }
     .solo-role{
       color: rgba(170,200,255,0.95);
@@ -304,23 +327,10 @@
       line-height:1.75;
       font-size:14px;
       max-width: 72ch;
-    }
-    .solo-badges{
-      margin-top: 14px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-    .badge{
-      padding: 8px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.035);
-      color: rgba(255,255,255,0.86);
-      font-size:12px;
+      word-break:keep-all;
     }
 
-    /* 출연진(게스트란 단어 안 씀) */
+    /* 출연진 */
     .grid{
       display:grid;
       grid-template-columns: repeat(4, 1fr);
@@ -370,7 +380,7 @@
       line-height:1.45;
     }
 
-    /* 팜플렛(이미지 그대로) */
+    /* 팜플렛 */
     .pamphlets{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -401,6 +411,7 @@
       color: rgba(255,255,255,0.88);
       line-height:1.85;
       font-size:14px;
+      word-break:keep-all;
     }
     .list li{margin:6px 0}
     .note{
@@ -408,6 +419,7 @@
       color: var(--muted2);
       font-size:12px;
       line-height:1.6;
+      word-break:keep-all;
     }
 
     /* 장소/지도 */
@@ -457,6 +469,12 @@
       font-size:12px;
       line-height:1.7;
       text-align:left;
+      word-break:keep-all;
+    }
+
+    /* 앵커 점프(헤더 높이 보정) */
+    .anchor{
+      scroll-margin-top: calc(var(--headerH) + 14px);
     }
 
     @media (max-width: 1100px){
@@ -465,12 +483,13 @@
       .solo{grid-template-columns: 1fr}
       .grid{grid-template-columns: repeat(2, 1fr)}
       .pamphlets{grid-template-columns:1fr}
-      .brand{min-width:auto}
     }
     @media (max-width: 560px){
       .grid{grid-template-columns: 1fr}
       .meta{grid-template-columns: 1fr}
       .hero h1{font-size:28px}
+      .brand-title strong{max-width: 48vw}
+      .brand-title span{max-width: 48vw}
     }
   </style>
 </head>
@@ -501,7 +520,7 @@
 
   <main>
 
-    <!-- HERO -->
+    <!-- HERO / POSTER -->
     <div class="panel">
       <div class="hero">
         <div class="hero-wrap">
@@ -513,8 +532,7 @@
 
             <h1>박상진 첫 번째 피리 독주회</h1>
             <p class="sub">
-              섬세하면서도 힘 있는 피리의 선율을 통해 국악의 진면목을 느낄 수 있는 공연으로 준비되었습니다.
-              천안시민 및 청소년 누구나 무료로 관람하실 수 있습니다.
+              섬세하면서도 힘 있는 피리의 선율, 국악의 진면목을 느낄 수 있는 이번 공연은 천안시민·청소년 누구나 무료 관람이 가능합니다.
             </p>
 
             <div class="meta">
@@ -537,9 +555,8 @@
             </div>
           </div>
 
-          <div class="hero-right">
-            <div class="poster" id="poster">
-              <!-- 파일명: poster.png -->
+          <div class="hero-right anchor" id="poster">
+            <div class="poster">
               <img src="poster.png" alt="공연 포스터 이미지" />
             </div>
           </div>
@@ -548,42 +565,40 @@
     </div>
 
     <!-- INFO -->
-    <section id="info"></section>
-    <div class="panel" style="margin-top:18px">
+    <div class="panel anchor" id="info" style="margin-top:18px">
       <div class="panel-inner">
         <div class="sec-title">
           <h2>공연 안내</h2>
-          <p>제공된 안내문 표현을 유지하여 정리합니다.</p>
+          <p>사전신청을 통해 보다 편안하게 관람하실 수 있습니다.</p>
         </div>
 
         <ul class="list">
-          <li>본 공연은 천안시민 및 청소년 누구나 무료로 관람이 가능합니다.</li>
           <li>사전 신청 시 보다 여유롭고 가까운 자리에서 공연을 관람하실 수 있습니다.</li>
-          <li>관람석 200석은 사전신청을 통한 선예약으로 운영되며, 신청 시 대표자 연락처로 확정 문자가 발송됩니다.</li>
-          <li>행사 당일 공연장 우선 입장 및 좌석 안내가 진행되며, 지정좌석제가 아님을 안내드립니다.</li>
-          <li>사전예약좌석 200석 외에도 당일 현장접수로 관람이 가능합니다.</li>
+          <li>관람석 200석 사전신청을 통한 선예약이 진행되며, 신청 시 대표자 연락처로 확정 문자를 보내드립니다.</li>
+          <li>본행사 당일 공연장 우선 입장과 좌석 안내를 도와드리며, 지정좌석제가 아님을 안내드립니다.</li>
+          <li>사전신청을 통한 관람석 200석 외 당일 현장접수로도 관람이 가능합니다.</li>
         </ul>
 
         <div class="note">
           신청기간: 사전예약좌석 200석 마감까지<br>
-          지원방법: 홈페이지 공지사항을 참고하여 네이버폼을 통한 사전신청서 제출<br>
+          공연일시: 2026. 1. 31. (토) 17시<br>
+          공연장소: 천안시청소년복합커뮤니티센터 1층 대공연장<br>
+          지원방법: 홈페이지 공지사항을 참고하여 네이버폼을 통한 사전신청서 제출 (https://naver.me/xcA1pVbg)<br>
           문 의: 교육사업팀 041-557-0924
         </div>
       </div>
     </div>
 
     <!-- SOLOIST -->
-    <section id="solo"></section>
-    <div class="panel" style="margin-top:18px">
+    <div class="panel anchor" id="solo" style="margin-top:18px">
       <div class="panel-inner">
         <div class="sec-title">
           <h2>독주자</h2>
-          <p>본 공연은 ‘박상진 독주회’로 진행됩니다.</p>
+          <p>주최·주관: 박상진</p>
         </div>
 
         <div class="solo">
           <div class="solo-photo">
-            <!-- 파일명: profile-park.png -->
             <img src="profile-park.png" alt="피리 연주자 박상진 프로필 사진" />
           </div>
 
@@ -592,25 +607,18 @@
             <div class="solo-name">박상진</div>
             <p class="solo-desc">
               본 공연은 ‘박상진 첫 번째 피리 독주회’로 진행됩니다.
-              출연진 구성은 협연이 아니라, 독주 무대에 참여하는 출연으로 운영됩니다.
             </p>
-            <div class="solo-badges">
-              <span class="badge">주최·주관: 박상진</span>
-              <span class="badge">공연일시: 2026. 01. 31. (토) 17:00</span>
-              <span class="badge">공연장소: 천안시청소년복합커뮤니티센터 1층 대공연장</span>
-            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- CAST -->
-    <section id="cast"></section>
-    <div class="panel" style="margin-top:18px">
+    <div class="panel anchor" id="cast" style="margin-top:18px">
       <div class="panel-inner">
         <div class="sec-title">
           <h2>출연진</h2>
-          <p>‘게스트’라는 단어 없이, 출연진으로 정리합니다.</p>
+          <p>독주 무대에 참여하는 출연진입니다.</p>
         </div>
 
         <div class="grid">
@@ -677,20 +685,15 @@
             </div>
           </div>
         </div>
-
-        <div class="note" style="margin-top:14px">
-          출연진 구성은 독주 무대에 참여하는 출연으로 운영됩니다.
-        </div>
       </div>
     </div>
 
     <!-- PAMPHLET -->
-    <section id="pamphlet"></section>
-    <div class="panel" style="margin-top:18px">
+    <div class="panel anchor" id="pamphlet" style="margin-top:18px">
       <div class="panel-inner">
         <div class="sec-title">
           <h2>팜플렛</h2>
-          <p>제작된 팜플렛 이미지를 그대로 제공합니다.</p>
+          <p>이미지 원본 기준으로 표시됩니다.</p>
         </div>
 
         <div class="pamphlets">
@@ -701,20 +704,15 @@
             <img src="pamphlet-b.png" alt="팜플렛 B면" />
           </div>
         </div>
-
-        <div class="note">
-          팜플렛 이미지는 PNG 원본을 사용하며, 화면에 맞추어 축소하여 표시됩니다.
-        </div>
       </div>
     </div>
 
     <!-- PLACE -->
-    <section id="place"></section>
-    <div class="panel" style="margin-top:18px">
+    <div class="panel anchor" id="place" style="margin-top:18px">
       <div class="panel-inner">
         <div class="sec-title">
           <h2>장소·지도</h2>
-          <p>장소 표기는 제공된 안내문 기준으로 적용합니다.</p>
+          <p>천안시청소년복합커뮤니티센터 1층 대공연장</p>
         </div>
 
         <div class="two">
@@ -727,7 +725,7 @@
                 <li>문 의: 교육사업팀 041-557-0924</li>
               </ul>
               <div class="note">
-                사전예약좌석 200석 외에도 당일 현장접수로 관람이 가능합니다.
+                사전예약좌석 200석 외 당일 현장접수로도 관람이 가능합니다.
               </div>
             </div>
           </div>
@@ -744,12 +742,11 @@
     </div>
 
     <!-- SUPPORT -->
-    <section id="support"></section>
-    <div class="panel" style="margin-top:18px">
+    <div class="panel anchor" id="support" style="margin-top:18px">
       <div class="panel-inner">
         <div class="sec-title">
           <h2>후원·제작</h2>
-          <p>로고는 업로드된 PNG 파일명 기준으로 연결합니다.</p>
+          <p>로고는 후원·제작 표기용만 배치합니다.</p>
         </div>
 
         <div class="logos">
@@ -757,11 +754,10 @@
           <div class="logo-item"><img src="logo-youthhub.png" alt="천안시청소년복합커뮤니티센터 로고" /></div>
           <div class="logo-item"><img src="logo-theheungcompany.png" alt="더흥컴퍼니 로고" /></div>
           <div class="logo-item"><img src="logo-clartwork.png" alt="CL artwork 로고" /></div>
-          <div class="logo-item"><img src="logo-heung.png" alt="흥 로고" /></div>
         </div>
 
         <footer>
-          본 공연은 2025년도 천안문화재단 문화예술보조금 지원사업으로 진행됩니다.
+          본 사업은 2025년도 천안문화재단 문화예술보조금을 지원받아 진행됩니다.
         </footer>
       </div>
     </div>
@@ -769,28 +765,35 @@
   </main>
 
   <script>
-    /* 스크롤(천) 안 움직임 해결: 앵커 클릭 시 부드러운 스크롤 + 헤더 높이 보정 */
+    /* iOS Safari 포함: 앵커가 안 열리는 문제 방지(부드러운 스크롤 + 헤더 높이 보정) */
     (function(){
-      function scrollToHash(hash){
-        var el = document.querySelector(hash);
+      function headerHeight(){
+        var v = getComputedStyle(document.documentElement).getPropertyValue('--headerH').trim();
+        var n = parseInt(v, 10);
+        return isNaN(n) ? 64 : n;
+      }
+
+      function scrollToId(id){
+        var el = document.getElementById(id);
         if(!el) return;
-        var headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--headerH')) || 64;
-        var top = el.getBoundingClientRect().top + window.pageYOffset - headerH - 10;
+        var top = el.getBoundingClientRect().top + window.pageYOffset - headerHeight() - 10;
         window.scrollTo({ top: top, behavior: 'smooth' });
       }
 
       document.querySelectorAll('a[href^="#"]').forEach(function(a){
         a.addEventListener('click', function(e){
           var hash = a.getAttribute('href');
-          if(!hash || hash === '#') return;
+          if(!hash || hash.length < 2) return;
           e.preventDefault();
+          var id = hash.slice(1);
           history.pushState(null, '', hash);
-          scrollToHash(hash);
-        });
+          scrollToId(id);
+        }, { passive:false });
       });
 
-      if(location.hash){
-        setTimeout(function(){ scrollToHash(location.hash); }, 150);
+      if(location.hash && location.hash.length > 1){
+        var id = location.hash.slice(1);
+        setTimeout(function(){ scrollToId(id); }, 120);
       }
     })();
   </script>
