@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>박상진 첫 번째 피리독주회</title>
+
+  <style>
+    :root{
+      --bg:#0b0f1a;
+      --card1:rgba(255,255,255,0.08);
+      --card2:rgba(255,255,255,0.02);
+      --text:rgba(255,255,255,0.92);
+      --muted:rgba(255,255,255,0.75);
+      --muted2:rgba(255,255,255,0.62);
+      --headerH:56px;
+      --radius:16px;
+      --maxW:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 420px at 50% 0%, rgba(120,170,255,0.18), transparent 60%),
+        linear-gradient(180deg, #0c1324, var(--bg));
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+
+    header{
+      position:fixed;
+      top:0; left:0; right:0;
+      height:var(--headerH);
+      z-index:100;
+      background: rgba(10, 15, 30, 0.82);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      display:flex;
+      align-items:center;
+    }
+    .header-inner{
+      width:100%;
+      max-width:var(--maxW);
+      margin:0 auto;
+      padding:0 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+      min-width: 220px;
+    }
+    .brand img{
+      height:22px;
+      width:auto;
+      display:block;
+      opacity:0.92;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+    }
+    .brand .title{
+      font-size:14px;
+      color:rgba(255,255,255,0.86);
+      letter-spacing:-0.2px;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      font-size:13px;
+      color:rgba(255,255,255,0.72);
+    }
+    nav a{opacity:0.9}
+    nav a:hover{opacity:1}
+
+    .btn{
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      font-size:13px;
+      color:rgba(255,255,255,0.88);
+      cursor:pointer;
+      user-select:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+    .btn:hover{background: rgba(255,255,255,0.09)}
+    .btn.primary{
+      background: rgba(140,170,255,0.16);
+      border-color: rgba(140,170,255,0.34);
+    }
+
+    @media (max-width: 900px){
+      nav{display:none;}
+      .brand{min-width:auto;}
+    }
+
+    main{
+      max-width:var(--maxW);
+      margin:0 auto;
+      padding: calc(var(--headerH) + 22px) 18px 80px;
+    }
+    section{margin-top:18px}
+
+    .card{
+      background: linear-gradient(180deg, var(--card1), var(--card2));
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius);
+      padding:24px;
+      box-shadow: 0 26px 80px rgba(0,0,0,0.34);
+    }
+    .card h2{
+      margin:0 0 14px 0;
+      font-size:18px;
+      font-weight:500;
+      letter-spacing:-0.2px;
+    }
+    .p{
+      margin:0;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+    .list{
+      margin:14px 0 0 0;
+      padding-left:18px;
+      line-height:1.75;
+      font-size:14px;
+      color:rgba(255,255,255,0.86);
+    }
+
+    /* HERO */
+    .hero{
+      text-align:center;
+      padding-top: 6px;
+    }
+    .poster-wrap{
+      position:relative;
+      max-width: 520px;
+      margin: 0 auto 18px;
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 30px 110px rgba(0,0,0,0.55);
+      background: rgba(255,255,255,0.03);
+    }
+    .poster-wrap img{
+      width:100%;
+      display:block;
+    }
+
+    /* Curtains: slower + less opaque so poster is visible */
+    .curtain{
+      position:absolute;
+      top:-14%;
+      height:128%;
+      width:58%;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04) 46%, rgba(0,0,0,0.52)),
+        radial-gradient(560px 900px at 30% 20%, rgba(160,210,255,0.18), transparent 58%),
+        radial-gradient(560px 900px at 70% 30%, rgba(120,170,255,0.12), transparent 58%);
+      border:1px solid rgba(255,255,255,0.10);
+      opacity:0;
+      transform: translateY(-38%);
+      animation: curtainDown 5.2s cubic-bezier(.12,.90,.18,1) .45s both;
+      pointer-events:none;
+      filter: blur(0.2px);
+    }
+    .curtain.left{left:-8%; border-radius: 44px 22px 22px 44px;}
+    .curtain.right{right:-8%; border-radius: 22px 44px 44px 22px;}
+    @keyframes curtainDown{
+      from{opacity:0; transform: translateY(-38%);}
+      to{opacity:0.62; transform: translateY(0);}
+    }
+
+    .hero h1{
+      font-size:28px;
+      margin: 10px 0 10px;
+      font-weight:500;
+      letter-spacing:-0.4px;
+    }
+    .hero .meta{
+      font-size:15px;
+      line-height:1.6;
+      color:rgba(255,255,255,0.84);
+    }
+    .hero-actions{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    /* Cast */
+    .cast-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+      text-align:center;
+    }
+    .cast{
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      overflow:hidden;
+      background: rgba(255,255,255,0.04);
+    }
+    .cast img{
+      width:100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display:block;
+      background: rgba(255,255,255,0.03);
+    }
+    .cast .cap{
+      padding:12px 10px 12px;
+    }
+    .cast .cap p{
+      margin:0;
+      font-size:14px;
+      color:rgba(255,255,255,0.88);
+    }
+
+    /* Pamphlet thumbnails */
+    .thumb-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .thumb{
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      overflow:hidden;
+      background: rgba(255,255,255,0.04);
+    }
+    .thumb a{display:block}
+    .thumb img{
+      width:100%;
+      display:block;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: rgba(255,255,255,0.03);
+    }
+    .thumb .cap{
+      padding:12px 14px 14px;
+      text-align:left;
+    }
+    .thumb .cap .t{
+      margin:0;
+      font-size:14px;
+      color:rgba(255,255,255,0.88);
+    }
+    .thumb .cap .s{
+      margin:4px 0 0 0;
+      font-size:12px;
+      color:rgba(255,255,255,0.62);
+    }
+
+    /* Map */
+    .mapWrap{
+      margin-top:14px;
+      width:100%;
+      border-radius: 12px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+    }
+    .mapWrap iframe{
+      width:100%;
+      height:360px;
+      border:0;
+      display:block;
+    }
+    @media (max-width: 520px){
+      .mapWrap iframe{height:300px;}
+    }
+
+    /* BGM */
+    .bgm-fab{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 120;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(10, 15, 30, 0.72);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+    }
+    .bgm-fab .state{
+      font-size:12px;
+      color:rgba(255,255,255,0.70);
+      white-space:nowrap;
+    }
+
+    /* Footer logos */
+    footer{
+      margin-top: 22px;
+      padding: 20px 6px 0;
+      text-align:center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.60);
+    }
+    .footer-logos{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:14px;
+      opacity:0.92;
+    }
+    .footer-logos img{
+      height:26px;
+      width:auto;
+      display:block;
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:10px;
+      padding:6px 10px;
+      background: rgba(255,255,255,0.04);
+    }
+    .footer-links{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .footer-links a{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      font-size:12px;
+      color:rgba(255,255,255,0.78);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <img src="logo-heung.png" alt="興" />
+        <div class="title">박상진 첫 번째 피리독주회</div>
+      </div>
+
+      <nav>
+        <a href="#program">공연 안내</a>
+        <a href="#cast">출연진</a>
+        <a href="#location">장소</a>
+        <a href="#pamphlet">팜플렛</a>
+        <a href="https://www.instagram.com/cayouth_hub?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">센터 인스타</a>
+      </nav>
+
+      <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="poster-wrap" aria-label="공연 포스터">
+        <div class="curtain left" aria-hidden="true"></div>
+        <div class="curtain right" aria-hidden="true"></div>
+        <img src="poster.jpg" alt="박상진 첫 번째 피리독주회 포스터" />
+      </div>
+
+      <h1>박상진 첫 번째 피리독주회</h1>
+      <div class="meta">
+        2026년 1월 31일 토요일 17:00<br />
+        천안시청소년복합커뮤니티센터 1층 대공연장
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청 바로가기</a>
+        <a class="btn" href="#location">오시는 길</a>
+        <a class="btn" href="#pamphlet">팜플렛</a>
+      </div>
+    </section>
+
+    <section id="program">
+      <div class="info-grid">
+        <div class="card">
+          <h2>공연 안내</h2>
+          <ul class="list">
+            <li>무료 관람으로 운영한다.</li>
+            <li>사전신청은 네이버폼으로 진행한다.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>문의</h2>
+          <ul class="list">
+            <li>교육사업팀 041-557-0924</li>
+          </ul>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">네이버폼 사전신청</a>
+            <a class="btn" href="https://www.instagram.com/cayouth_hub?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">센터 인스타</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cast">
+      <div class="card">
+        <h2>출연진</h2>
+
+        <div class="cast-grid">
+          <div class="cast">
+            <img src="profile-park.png" alt="피리 박상진" />
+            <div class="cap"><p>피리 박상진</p></div>
+          </div>
+
+          <div class="cast">
+            <img src="profile-gayageum.png" alt="가야금 이현주" />
+            <div class="cap"><p>가야금 이현주</p></div>
+          </div>
+
+          <div class="cast">
+            <img src="profile-daegum.png" alt="대금 김진수" />
+            <div class="cap"><p>대금 김진수</p></div>
+          </div>
+
+          <div class="cast">
+            <img src="profile-ajaeng.png" alt="아쟁 김명신" />
+            <div class="cap"><p>아쟁 김명신</p></div>
+          </div>
+
+          <div class="cast">
+            <img src="profile-perc.png" alt="타악 한유림" />
+            <div class="cap"><p>타악 한유림</p></div>
+          </div>
+
+          <div class="cast">
+            <img src="profile-haegeum.png" alt="해금 조소연" />
+            <div class="cap"><p>해금 조소연</p></div>
+          </div>
+
+          <div class="cast">
+            <img src="profile-seodo.png" alt="서도소리 박래송" />
+            <div class="cap"><p>서도소리 박래송</p></div>
+          </div>
+
+          <div class="cast">
+            <img src="profile-gyeonggi.png" alt="경기소리 박나현" />
+            <div class="cap"><p>경기소리 박나현</p></div>
+          </div>
+
+          <div class="cast">
+            <img src="profile-namdo.png" alt="남도소리 이해원" />
+            <div class="cap"><p>남도소리 이해원</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="location">
+      <div class="card">
+        <h2>장소</h2>
+        <p class="p">
+          천안시청소년복합커뮤니티센터 1층 대공연장<br />
+          도로명주소: 불당19로 82
+        </p>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="https://www.google.com/maps?q=%EC%B2%9C%EC%95%88%EC%8B%9C%EC%B2%AD%EC%86%8C%EB%85%84%EB%B3%B5%ED%95%A9%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%EC%84%BC%ED%84%B0" target="_blank" rel="noopener">지도 크게 보기</a>
+          <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
+        </div>
+
+        <div class="mapWrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6388.009758144968!2d127.10018600000001!3d36.818403!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b27f223a9a69b%3A0xcaec7b68f196768!2z7LKc7JWI7LKt7IaM64WE67O17ZWp7Luk666k64uI7Yuw7IS87YSw!5e0!3m2!1sko!2skr!4v1768643849266!5m2!1sko!2skr"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="천안시청소년복합커뮤니티센터 지도"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="pamphlet">
+      <div class="card">
+        <h2>팜플렛</h2>
+        <div class="thumb-grid">
+          <div class="thumb">
+            <a href="pamphlet-a.jpg" target="_blank" rel="noopener">
+              <img src="pamphlet-a.jpg" alt="팜플렛 이미지 A" />
+              <div class="cap">
+                <p class="t">팜플렛 이미지 A</p>
+                <p class="s">클릭 시 원본 확대</p>
+              </div>
+            </a>
+          </div>
+          <div class="thumb">
+            <a href="pamphlet-b.jpg" target="_blank" rel="noopener">
+              <img src="pamphlet-b.jpg" alt="팜플렛 이미지 B" />
+              <div class="cap">
+                <p class="t">팜플렛 이미지 B</p>
+                <p class="s">클릭 시 원본 확대</p>
+              </div>
+            </a>
+          </div>
+          <div class="thumb">
+            <a href="poster.jpg" target="_blank" rel="noopener">
+              <img src="poster.jpg" alt="공연 포스터" />
+              <div class="cap">
+                <p class="t">공연 포스터</p>
+                <p class="s">클릭 시 원본 확대</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>후원·제작</div>
+      <div class="footer-logos">
+        <img src="logo-cheonanfoundation.png" alt="천안문화재단" />
+        <img src="logo-youthhub.png" alt="천안시청소년복합커뮤니티센터" />
+        <img src="logo-theheungcompany.png" alt="더흥컴퍼니" />
+        <img src="logo-clartwork.png" alt="CL artwork" />
+      </div>
+      <div class="footer-links">
+        <a href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">네이버폼</a>
+        <a href="https://www.instagram.com/cayouth_hub?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">센터 인스타</a>
+      </div>
+    </footer>
+  </main>
+
+  <audio id="bgm" preload="none" loop>
+    <source src="bgm.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="bgm-fab" aria-label="배경음악">
+    <button class="btn" id="bgmBtn" type="button">BGM 재생</button>
+    <div class="state" id="bgmState">정지</div>
+  </div>
+
+  <script>
+    const bgm = document.getElementById("bgm");
+    const btn = document.getElementById("bgmBtn");
+    const state = document.getElementById("bgmState");
+
+    function setUI(playing){
+      btn.textContent = playing ? "BGM 정지" : "BGM 재생";
+      state.textContent = playing ? "재생" : "정지";
+    }
+    setUI(false);
+
+    btn.addEventListener("click", async () => {
+      try{
+        if (bgm.paused){
+          await bgm.play();
+          setUI(true);
+        } else {
+          bgm.pause();
+          setUI(false);
+        }
+      } catch(e){
+        setUI(false);
+        alert("브라우저 재생 정책 또는 bgm.mp3 업로드 여부를 확인해야 한다.");
+      }
+    });
+  </script>
+</body>
+</html>
