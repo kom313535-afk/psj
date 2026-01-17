@@ -7,450 +7,420 @@
 
   <style>
     :root{
-      --bg:#070b10;
-      --panel:rgba(255,255,255,0.06);
-      --panel2:rgba(255,255,255,0.04);
+      --bg0:#05070b;
+      --bg1:#070b12;
+      --ink:rgba(255,255,255,0.92);
+      --sub:rgba(255,255,255,0.70);
+      --sub2:rgba(255,255,255,0.56);
       --line:rgba(255,255,255,0.10);
-      --text:rgba(255,255,255,0.92);
-      --muted:rgba(255,255,255,0.70);
-      --muted2:rgba(255,255,255,0.55);
-      --accent:rgba(170,200,255,0.95);
-      --shadow:0 14px 38px rgba(0,0,0,0.38);
-      --radius:18px;
-      --radius2:22px;
+      --line2:rgba(255,255,255,0.07);
+      --glass:rgba(255,255,255,0.06);
+      --glass2:rgba(255,255,255,0.035);
+      --accent:rgba(175,205,255,0.95);
       --max:1180px;
-      --headerH:70px;
+      --hdr:72px;
+      --r1:18px;
+      --r2:24px;
+      --shadow: 0 18px 54px rgba(0,0,0,0.55);
+      --shadow2: 0 10px 26px rgba(0,0,0,0.42);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      color:var(--text);
+      color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",Roboto,Arial,sans-serif;
       background:
-        radial-gradient(1200px 650px at 15% 10%, rgba(90,140,220,0.28), rgba(0,0,0,0) 60%),
-        radial-gradient(950px 520px at 85% 18%, rgba(150,190,255,0.18), rgba(0,0,0,0) 65%),
-        linear-gradient(180deg, #05080c 0%, #070b10 30%, #070b10 100%);
-      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", Roboto, Arial, sans-serif;
+        radial-gradient(1200px 720px at 20% 8%, rgba(85,135,220,0.24), rgba(0,0,0,0) 58%),
+        radial-gradient(980px 620px at 82% 14%, rgba(180,215,255,0.14), rgba(0,0,0,0) 60%),
+        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 45%, #070b12 100%);
       letter-spacing:-0.2px;
       overflow-x:hidden;
     }
 
-    a{color:inherit; text-decoration:none}
-    img{max-width:100%; display:block}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
 
+    /* HEADER */
     header{
       position:sticky;
       top:0;
-      z-index:50;
-      min-height:var(--headerH);
-      backdrop-filter: blur(10px);
-      background: rgba(7,11,16,0.74);
+      z-index:60;
+      height:var(--hdr);
+      backdrop-filter: blur(14px);
+      background: rgba(5,7,11,0.62);
       border-bottom:1px solid rgba(255,255,255,0.08);
     }
-
-    .header-inner{
+    .hwrap{
       max-width:var(--max);
+      height:100%;
       margin:0 auto;
-      padding:10px 14px;
+      padding:0 14px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
     }
-
     .brand{
       display:flex;
       align-items:center;
       gap:10px;
       min-width:0;
-      flex: 1 1 auto;
+      flex:1 1 auto;
     }
-    .brand-mark{
-      width:40px;
-      height:40px;
+    .mark{
+      width:40px;height:40px;
       border-radius:12px;
-      background: linear-gradient(135deg, rgba(150,190,255,0.35), rgba(255,255,255,0.06));
+      background: linear-gradient(135deg, rgba(170,210,255,0.22), rgba(255,255,255,0.05));
       border:1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.25);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      box-shadow: 0 10px 18px rgba(0,0,0,0.35);
+      display:flex;align-items:center;justify-content:center;
       font-weight:950;
-      color: rgba(255,255,255,0.88);
-      flex: 0 0 auto;
+      color:rgba(255,255,255,0.88);
+      flex:0 0 auto;
     }
-
-    /* 모바일 잘림 방지: 2줄 허용 + 폰트 반응형 */
-    .brand-title{
-      display:flex;
-      flex-direction:column;
-      line-height:1.15;
-      min-width:0;
-      flex: 1 1 auto;
-    }
-    .brand-title strong{
+    .btxt{min-width:0}
+    .btxt .t{
       margin:0;
-      font-size: clamp(12px, 3.6vw, 14px);
       font-weight:950;
-      color: rgba(255,255,255,0.92);
+      font-size: clamp(12px, 3.6vw, 14px);
+      line-height:1.15;
       overflow:hidden;
       display:-webkit-box;
       -webkit-line-clamp:2;
       -webkit-box-orient:vertical;
       word-break:keep-all;
     }
-    .brand-title span{
-      font-size: clamp(11px, 3.2vw, 12px);
-      color: var(--muted2);
+    .btxt .d{
       margin-top:4px;
+      font-size: clamp(11px, 3.2vw, 12px);
+      color:var(--sub2);
+      white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-      white-space:nowrap;
     }
 
     nav{
       display:flex;
       align-items:center;
-      gap:8px;
-      flex: 0 0 auto;
+      gap:10px;
+      flex:0 0 auto;
       overflow-x:auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width:none;
-      max-width: 55vw;
+      max-width: 56vw;
+      padding-bottom:2px;
     }
     nav::-webkit-scrollbar{display:none}
-
-    .nav-link{
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.86);
+    .nl{
       font-size:13px;
-      transition: transform 0.15s ease, background 0.15s ease, border 0.15s ease;
-      cursor:pointer;
-      user-select:none;
+      color:rgba(255,255,255,0.78);
+      padding:8px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.0);
       white-space:nowrap;
-      flex: 0 0 auto;
+      flex:0 0 auto;
     }
-    .nav-link:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.16);
-    }
-    .btn{
+    .nl:hover{color:rgba(255,255,255,0.92);border-bottom:1px solid rgba(175,205,255,0.45)}
+    .cta{
       padding:10px 14px;
       border-radius:999px;
-      border:1px solid rgba(170,200,255,0.35);
-      background: rgba(170,200,255,0.14);
-      color: rgba(255,255,255,0.94);
+      border:1px solid rgba(175,205,255,0.36);
+      background: rgba(175,205,255,0.14);
       font-size:13px;
       font-weight:950;
-      cursor:pointer;
-      transition: transform 0.15s ease, background 0.15s ease, border 0.15s ease;
       white-space:nowrap;
-      flex: 0 0 auto;
+      flex:0 0 auto;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
     }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(170,200,255,0.18);
-      border:1px solid rgba(170,200,255,0.46);
-    }
+    .cta:hover{background: rgba(175,205,255,0.18);border:1px solid rgba(175,205,255,0.46)}
 
     main{
       max-width:var(--max);
       margin:0 auto;
-      padding: 18px 14px 76px;
+      padding: 0 14px 84px;
     }
 
-    .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+    .anchor{scroll-margin-top: calc(var(--hdr) + 12px);}
+
+    /* TOP: POSTER FIRST */
+    .poster-hero{
+      margin-top: 14px;
+      border-radius: var(--r2);
+      overflow:hidden;
       border:1px solid rgba(255,255,255,0.10);
-      border-radius: var(--radius2);
       box-shadow: var(--shadow);
+      position:relative;
+      background: rgba(255,255,255,0.03);
+    }
+    .poster-hero .img{
+      height: min(76vh, 740px);
+      background: rgba(255,255,255,0.02);
+      cursor: zoom-in;
+    }
+    .poster-hero .img img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: center;
+      filter: contrast(1.02) saturate(1.04);
+    }
+    /* 포스터 위에 정보 오버레이(절제된 고급 톤) */
+    .poster-hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.42) 68%, rgba(0,0,0,0.62) 100%),
+        radial-gradient(900px 420px at 30% 18%, rgba(175,205,255,0.18), rgba(0,0,0,0) 60%);
+      pointer-events:none;
+    }
+    .overlay{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      padding: 18px 18px 16px;
+      z-index:2;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 7px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.84);
+      font-size:13px;
+      backdrop-filter: blur(10px);
+    }
+    .kicker b{color:rgba(255,255,255,0.92)}
+    .h1{
+      margin: 12px 0 10px;
+      font-weight:950;
+      letter-spacing:-0.9px;
+      line-height:1.10;
+      font-size: clamp(26px, 6.6vw, 42px);
+      word-break:keep-all;
+    }
+    .lead{
+      margin:0;
+      max-width: 66ch;
+      color: rgba(255,255,255,0.80);
+      line-height:1.70;
+      font-size:15px;
+      word-break:keep-all;
+    }
+    .meta{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .meta .m{
+      padding: 12px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(10,14,20,0.46);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow2);
+      min-width:0;
+    }
+    .meta .k{font-size:12px;color:var(--sub2);margin-bottom:6px}
+    .meta .v{
+      font-weight:950;
+      font-size:14px;
+      line-height:1.35;
+      color:rgba(255,255,255,0.92);
+      word-break:keep-all;
+    }
+
+    /* SECTION */
+    .sec{
+      margin-top: 18px;
+      border-radius: var(--r2);
+      border:1px solid rgba(255,255,255,0.10);
+      background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.030));
+      box-shadow: var(--shadow2);
       overflow:hidden;
     }
-    .panel-inner{ padding: 26px 18px; }
-
-    .sec-title{
+    .sec .inner{padding: 22px 18px;}
+    .st{
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
       gap:14px;
-      padding: 0 2px 14px;
-      border-bottom:1px solid rgba(255,255,255,0.06);
-      margin-bottom:16px;
+      padding-bottom:12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 14px;
     }
-    .sec-title h2{
+    .st h2{
       margin:0;
-      font-size:20px;
+      font-size:18px;
       letter-spacing:-0.4px;
     }
-    .sec-title p{
+    .st p{
       margin:0;
-      color: var(--muted2);
       font-size:13px;
+      color:var(--sub2);
       line-height:1.45;
       text-align:right;
       word-break:keep-all;
     }
 
-    .anchor{
-      scroll-margin-top: calc(var(--headerH) + 14px);
-    }
-
-    /* HERO */
-    .hero{
-      position:relative;
-      padding: 26px 18px;
-    }
-    .hero-wrap{
-      display:grid;
-      grid-template-columns: 1fr 0.95fr;
-      gap: 18px;
-      align-items:stretch;
-    }
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(740px 460px at 20% 10%, rgba(150,190,255,0.22), rgba(0,0,0,0) 60%),
-        radial-gradient(680px 520px at 80% 30%, rgba(255,255,255,0.06), rgba(0,0,0,0) 60%);
-      pointer-events:none;
-    }
-    .hero-left, .hero-right{position:relative; z-index:1}
-
-    .hero-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      font-size:13px;
-      color: rgba(255,255,255,0.86);
-    }
-    .hero-kicker b{color: rgba(255,255,255,0.94)}
-    .hero h1{
-      margin:14px 0 10px;
-      font-size:34px;
-      letter-spacing:-0.8px;
-      line-height:1.15;
-      word-break:keep-all;
-    }
-    .hero .sub{
-      margin:0 0 18px;
-      color: var(--muted);
-      line-height:1.7;
-      font-size:15px;
-      max-width: 62ch;
-      word-break:keep-all;
-    }
-    .meta{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      margin-top: 14px;
-    }
-    .meta .box{
-      padding: 14px 14px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.035);
-      min-width:0;
-    }
-    .meta .k{ font-size:12px; color: var(--muted2); margin-bottom:6px; }
-    .meta .v{
-      font-size:14px;
-      color: rgba(255,255,255,0.92);
-      line-height:1.35;
-      font-weight:950;
-      word-break:keep-all;
-    }
-
-    /* 이미지 영역: 크기 확보 + 클릭 확대 */
-    .img-frame{
-      border-radius: 18px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.03);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px;
-      cursor: zoom-in;
-    }
-    .img-frame img{
-      width:100%;
-      height:100%;
-      object-fit: contain;
-      object-position:center;
-    }
-    .poster-frame{ min-height: 520px; }
-    .pamphlet-frame{ min-height: 560px; }
-
-    /* 독주자 */
-    .solo{
-      display:grid;
-      grid-template-columns: 340px 1fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    .solo-photo{
-      min-height: 520px;
-    }
-    .solo-info{
-      padding: 6px 6px 0;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      min-width:0;
-    }
-    .solo-role{
-      color: rgba(170,200,255,0.95);
-      font-weight:950;
-      font-size:13px;
-    }
-    .solo-name{
-      margin:10px 0 10px;
-      font-size:28px;
-      font-weight:950;
-      letter-spacing:-0.8px;
-    }
-
-    /* 출연진 */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    .card{
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.035);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      min-height: 320px;
-    }
-    /* 얼굴 잘림 방지: cover 금지 -> contain */
-    .card .ph{
-      height: 260px;
-      background: rgba(255,255,255,0.03);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px;
-    }
-    .card .ph img{
-      width:100%;
-      height:100%;
-      object-fit: contain;
-      object-position: center;
-      cursor: zoom-in;
-    }
-    .card .tx{
-      padding: 12px 12px 14px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    .card .inst{
-      font-size:12px;
-      color: rgba(170,200,255,0.95);
-      font-weight:950;
-    }
-    .card .nm{
-      font-size:15px;
-      font-weight:950;
-      margin:0;
-      letter-spacing:-0.2px;
-    }
-
-    /* 팜플렛 */
-    .pamphlets{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-    }
-
-    /* 안내 리스트 */
+    /* INFO LIST */
     .list{
       margin:0;
-      padding-left: 18px;
-      color: rgba(255,255,255,0.88);
+      padding-left:18px;
       line-height:1.85;
+      color: rgba(255,255,255,0.86);
       font-size:14px;
       word-break:keep-all;
     }
     .list li{margin:6px 0}
     .note{
       margin-top: 12px;
-      color: var(--muted2);
+      color:var(--sub2);
       font-size:12px;
       line-height:1.7;
       word-break:keep-all;
     }
 
-    /* 장소/지도 */
-    .two{
+    /* SOLO */
+    .solo{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 360px 1fr;
       gap:16px;
       align-items:stretch;
     }
-    .map{
-      border-radius: 18px;
-      overflow:hidden;
+    .frame{
+      border-radius: var(--r1);
       border:1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.03);
+      overflow:hidden;
+      cursor: zoom-in;
+    }
+    .frame img{
+      width:100%;
+      height:100%;
+      object-fit: contain;
+      object-position: center;
+      background: rgba(255,255,255,0.02);
+    }
+    .solo .frame{min-height: 520px}
+    .sinfo{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      min-width:0;
+    }
+    .role{
+      font-size:13px;
+      font-weight:950;
+      color: var(--accent);
+    }
+    .name{
+      margin:10px 0 10px;
+      font-size:28px;
+      font-weight:950;
+      letter-spacing:-0.8px;
+    }
+
+    /* CAST */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .card{
+      border-radius: var(--r1);
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      overflow:hidden;
+    }
+    .ph{
+      height: 260px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      padding:10px;
+      cursor: zoom-in;
+    }
+    .ph img{
+      width:100%;
+      height:100%;
+      object-fit: contain;
+      object-position: center;
+    }
+    .tx{
+      padding: 12px 12px 14px;
+    }
+    .inst{
+      font-size:12px;
+      font-weight:950;
+      color: var(--accent);
+      margin-bottom:6px;
+    }
+    .nm{
+      margin:0;
+      font-size:15px;
+      font-weight:950;
+      letter-spacing:-0.2px;
+    }
+
+    /* PAMPHLET */
+    .pgrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    .pframe{min-height: 560px}
+
+    /* PLACE */
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .map{
+      border-radius: var(--r1);
+      border:1px solid rgba(255,255,255,0.10);
+      overflow:hidden;
+      background: rgba(255,255,255,0.02);
       min-height: 420px;
     }
-    iframe{ width:100%; height:100%; border:0; display:block; }
+    iframe{width:100%;height:100%;border:0;display:block}
 
-    /* 후원/제작 로고 */
+    /* LOGOS */
     .logos{
       display:flex;
       flex-wrap:wrap;
-      gap:14px;
+      gap:12px;
       align-items:center;
-      justify-content:flex-start;
     }
-    .logo-item{
+    .logo{
       border-radius: 16px;
       border:1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
       padding: 12px 14px;
+      min-height: 76px;
       display:flex;
       align-items:center;
       justify-content:center;
-      min-height: 74px;
     }
-    .logo-item img{
-      height: 48px;
-      width:auto;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.22));
-    }
+    .logo img{height:52px;width:auto;filter: drop-shadow(0 10px 18px rgba(0,0,0,0.30));}
 
     footer{
-      margin-top:18px;
-      padding: 12px 2px 0;
-      color: rgba(255,255,255,0.55);
+      margin-top: 14px;
+      color: rgba(255,255,255,0.54);
       font-size:12px;
       line-height:1.7;
       word-break:keep-all;
     }
 
-    /* Lightbox (확대 보기) */
+    /* LIGHTBOX */
     .lb{
       position:fixed;
       inset:0;
-      background: rgba(0,0,0,0.78);
+      background: rgba(0,0,0,0.80);
       display:none;
       align-items:center;
       justify-content:center;
@@ -458,29 +428,28 @@
       padding: 18px;
     }
     .lb.open{display:flex;}
-    .lb-inner{
+    .lbinner{
       width:min(1100px, 98vw);
       height:min(92vh, 920px);
       border-radius: 16px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,0.14);
       background: rgba(10,14,20,0.92);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
-      position:relative;
+      box-shadow: 0 22px 70px rgba(0,0,0,0.62);
       display:flex;
       flex-direction:column;
     }
-    .lb-top{
+    .lbh{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
       padding: 10px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.82);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.80);
       font-size:12px;
     }
-    .lb-close{
+    .x{
       border:1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.06);
       color: rgba(255,255,255,0.92);
@@ -490,14 +459,14 @@
       font-weight:900;
       white-space:nowrap;
     }
-    .lb-body{
+    .lbb{
       flex:1;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding: 10px;
+      padding:10px;
     }
-    .lb-body img{
+    .lbb img{
       width:100%;
       height:100%;
       object-fit: contain;
@@ -505,99 +474,90 @@
     }
 
     @media (max-width: 1100px){
-      .hero-wrap{grid-template-columns:1fr}
       .two{grid-template-columns:1fr}
       .solo{grid-template-columns: 1fr}
-      .pamphlets{grid-template-columns:1fr}
       .grid{grid-template-columns: repeat(2, 1fr)}
+      .pgrid{grid-template-columns:1fr}
       nav{max-width: 62vw;}
+      .poster-hero .img{height: min(78vh, 760px);}
+      .solo .frame{min-height: 480px}
+      .pframe{min-height: 520px}
     }
     @media (max-width: 560px){
-      .grid{grid-template-columns: 1fr}
       .meta{grid-template-columns: 1fr}
-      .hero h1{font-size:28px}
+      .grid{grid-template-columns: 1fr}
       nav{max-width: 64vw;}
-      .poster-frame{ min-height: 420px; }
-      .pamphlet-frame{ min-height: 460px; }
-      .solo-photo{ min-height: 460px; }
+      .poster-hero .img{height: min(82vh, 780px);}
+      .solo .frame{min-height: 460px}
+      .pframe{min-height: 480px}
     }
   </style>
 </head>
 
 <body>
   <header>
-    <div class="header-inner">
-      <div class="brand" role="banner">
-        <div class="brand-mark">興</div>
-        <div class="brand-title">
-          <strong>박상진 첫 번째 피리 독주회</strong>
-          <span>2026. 01. 31. (토) 17:00</span>
+    <div class="hwrap">
+      <div class="brand">
+        <div class="mark">興</div>
+        <div class="btxt">
+          <div class="t">박상진 첫 번째 피리 독주회</div>
+          <div class="d">2026. 01. 31. (토) 17:00</div>
         </div>
       </div>
 
-      <nav aria-label="주요 메뉴">
-        <a class="nav-link" href="#poster">포스터</a>
-        <a class="nav-link" href="#info">공연 안내</a>
-        <a class="nav-link" href="#solo">독주자</a>
-        <a class="nav-link" href="#cast">출연진</a>
-        <a class="nav-link" href="#pamphlet">팜플렛</a>
-        <a class="nav-link" href="#place">장소·지도</a>
-        <a class="nav-link" href="#support">후원·제작</a>
-        <a class="btn" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
+      <nav aria-label="메뉴">
+        <a class="nl" href="#top">포스터</a>
+        <a class="nl" href="#info">공연 안내</a>
+        <a class="nl" href="#solo">독주자</a>
+        <a class="nl" href="#cast">출연진</a>
+        <a class="nl" href="#pamphlet">팜플렛</a>
+        <a class="nl" href="#place">장소·지도</a>
+        <a class="nl" href="#support">후원·제작</a>
+        <a class="cta" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
-    <div class="panel">
-      <div class="hero">
-        <div class="hero-wrap">
-          <div class="hero-left">
-            <div class="hero-kicker">
-              <b>2026년 첫 번째 국악콘서트</b>
-              <span>무료 관람</span>
-            </div>
+    <!-- 1) 포스터가 먼저 -->
+    <section class="poster-hero anchor" id="top">
+      <div class="img" data-zoom="poster.png" data-title="포스터 크게 보기">
+        <img data-src="poster.png" alt="공연 포스터" />
+      </div>
 
-            <h1>박상진 첫 번째 피리 독주회</h1>
-            <p class="sub">
-              섬세하면서도 힘 있는 피리의 선율, 국악의 진면목을 느낄 수 있는 공연입니다.
-              천안시민·청소년 누구나 무료로 관람하실 수 있습니다.
-            </p>
+      <div class="overlay">
+        <div class="kicker"><b>2026년 첫 번째 국악콘서트</b><span>무료 관람</span></div>
+        <div class="h1">박상진 첫 번째 피리 독주회</div>
+        <p class="lead">
+          섬세하면서도 힘 있는 피리의 선율, 국악의 진면목을 느낄 수 있는 공연입니다.
+          천안시민·청소년 누구나 무료로 관람하실 수 있습니다.
+        </p>
 
-            <div class="meta">
-              <div class="box">
-                <div class="k">공연 일시</div>
-                <div class="v">2026. 01. 31. (토) 17:00</div>
-              </div>
-              <div class="box">
-                <div class="k">공연 장소</div>
-                <div class="v">천안시청소년복합커뮤니티센터 1층 대공연장</div>
-              </div>
-              <div class="box">
-                <div class="k">관람 안내</div>
-                <div class="v">전석 무료 관람</div>
-              </div>
-              <div class="box">
-                <div class="k">사전신청</div>
-                <div class="v">네이버폼 접수</div>
-              </div>
-            </div>
+        <div class="meta">
+          <div class="m">
+            <div class="k">공연 일시</div>
+            <div class="v">2026. 01. 31. (토) 17:00</div>
           </div>
-
-          <div class="hero-right anchor" id="poster">
-            <div class="img-frame poster-frame" data-zoom="poster.png" data-title="포스터 크게 보기">
-              <img data-src="poster.png" alt="공연 포스터 이미지" />
-            </div>
+          <div class="m">
+            <div class="k">공연 장소</div>
+            <div class="v">천안시청소년복합커뮤니티센터 1층 대공연장</div>
+          </div>
+          <div class="m">
+            <div class="k">관람 안내</div>
+            <div class="v">전석 무료 관람</div>
+          </div>
+          <div class="m">
+            <div class="k">사전신청</div>
+            <div class="v">네이버폼 접수</div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- INFO -->
-    <div class="panel anchor" id="info" style="margin-top:18px">
-      <div class="panel-inner">
-        <div class="sec-title">
+    <!-- 2) 설명/안내가 그 다음 -->
+    <section class="sec anchor" id="info">
+      <div class="inner">
+        <div class="st">
           <h2>공연 안내</h2>
           <p>사전신청을 통해 보다 편안하게 관람하실 수 있습니다.</p>
         </div>
@@ -617,33 +577,31 @@
           문 의: 교육사업팀 041-557-0924
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- SOLOIST -->
-    <div class="panel anchor" id="solo" style="margin-top:18px">
-      <div class="panel-inner">
-        <div class="sec-title">
+    <section class="sec anchor" id="solo">
+      <div class="inner">
+        <div class="st">
           <h2>독주자</h2>
-          <p>주최·주관: 박상진</p>
+          <p>박상진 독주회</p>
         </div>
 
         <div class="solo">
-          <div class="img-frame solo-photo" data-zoom="profile-park.png" data-title="독주자 프로필 크게 보기">
+          <div class="frame" data-zoom="profile-park.png" data-title="독주자 프로필 크게 보기" style="min-height:520px">
             <img data-src="profile-park.png" alt="피리 연주자 박상진 프로필 사진" />
           </div>
 
-          <div class="solo-info">
-            <div class="solo-role">피리</div>
-            <div class="solo-name">박상진</div>
+          <div class="sinfo">
+            <div class="role">피리</div>
+            <div class="name">박상진</div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- CAST -->
-    <div class="panel anchor" id="cast" style="margin-top:18px">
-      <div class="panel-inner">
-        <div class="sec-title">
+    <section class="sec anchor" id="cast">
+      <div class="inner">
+        <div class="st">
           <h2>출연진</h2>
           <p>독주회에 참여하는 출연진입니다.</p>
         </div>
@@ -651,7 +609,7 @@
         <div class="grid">
           <div class="card">
             <div class="ph" data-zoom="profile-gayageum.png" data-title="가야금 프로필 크게 보기">
-              <img data-src="profile-gayageum.png" alt="가야금 출연진 프로필" />
+              <img data-src="profile-gayageum.png" alt="가야금 이현주" />
             </div>
             <div class="tx">
               <div class="inst">가야금</div>
@@ -661,7 +619,7 @@
 
           <div class="card">
             <div class="ph" data-zoom="profile-haegeum.png" data-title="해금 프로필 크게 보기">
-              <img data-src="profile-haegeum.png" alt="해금 출연진 프로필" />
+              <img data-src="profile-haegeum.png" alt="해금 조소연" />
             </div>
             <div class="tx">
               <div class="inst">해금</div>
@@ -671,7 +629,7 @@
 
           <div class="card">
             <div class="ph" data-zoom="profile-daegum.png" data-title="대금 프로필 크게 보기">
-              <img data-src="profile-daegum.png" alt="대금 출연진 프로필" />
+              <img data-src="profile-daegum.png" alt="대금 김진수" />
             </div>
             <div class="tx">
               <div class="inst">대금</div>
@@ -680,18 +638,8 @@
           </div>
 
           <div class="card">
-            <div class="ph" data-zoom="profile-seodo.png" data-title="서도소리 프로필 크게 보기">
-              <img data-src="profile-seodo.png" alt="서도소리 출연진 프로필" />
-            </div>
-            <div class="tx">
-              <div class="inst">서도소리</div>
-              <p class="nm">박래송</p>
-            </div>
-          </div>
-
-          <div class="card">
             <div class="ph" data-zoom="profile-ajaeng.png" data-title="아쟁 프로필 크게 보기">
-              <img data-src="profile-ajaeng.png" alt="아쟁 출연진 프로필" />
+              <img data-src="profile-ajaeng.png" alt="아쟁 김명신" />
             </div>
             <div class="tx">
               <div class="inst">아쟁</div>
@@ -701,7 +649,7 @@
 
           <div class="card">
             <div class="ph" data-zoom="profile-perc.png" data-title="타악 프로필 크게 보기">
-              <img data-src="profile-perc.png" alt="타악 출연진 프로필" />
+              <img data-src="profile-perc.png" alt="타악 한유림" />
             </div>
             <div class="tx">
               <div class="inst">타악</div>
@@ -710,8 +658,18 @@
           </div>
 
           <div class="card">
+            <div class="ph" data-zoom="profile-seodo.png" data-title="서도소리 프로필 크게 보기">
+              <img data-src="profile-seodo.png" alt="서도소리 박래송" />
+            </div>
+            <div class="tx">
+              <div class="inst">서도소리</div>
+              <p class="nm">박래송</p>
+            </div>
+          </div>
+
+          <div class="card">
             <div class="ph" data-zoom="profile-namdo.png" data-title="남도소리 프로필 크게 보기">
-              <img data-src="profile-namdo.png" alt="남도소리 출연진 프로필" />
+              <img data-src="profile-namdo.png" alt="남도소리 이혜원" />
             </div>
             <div class="tx">
               <div class="inst">남도소리</div>
@@ -720,38 +678,36 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- PAMPHLET -->
-    <div class="panel anchor" id="pamphlet" style="margin-top:18px">
-      <div class="panel-inner">
-        <div class="sec-title">
+    <section class="sec anchor" id="pamphlet">
+      <div class="inner">
+        <div class="st">
           <h2>팜플렛</h2>
           <p>이미지를 누르면 크게 확인하실 수 있습니다.</p>
         </div>
 
-        <div class="pamphlets">
-          <div class="img-frame pamphlet-frame" data-zoom="pamphlet-a.png" data-title="팜플렛 A면 크게 보기">
+        <div class="pgrid">
+          <div class="frame pframe" data-zoom="pamphlet-a.png" data-title="팜플렛 A면 크게 보기">
             <img data-src="pamphlet-a.png" alt="팜플렛 A면" />
           </div>
-          <div class="img-frame pamphlet-frame" data-zoom="pamphlet-b.png" data-title="팜플렛 B면 크게 보기">
+          <div class="frame pframe" data-zoom="pamphlet-b.png" data-title="팜플렛 B면 크게 보기">
             <img data-src="pamphlet-b.png" alt="팜플렛 B면" />
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- PLACE -->
-    <div class="panel anchor" id="place" style="margin-top:18px">
-      <div class="panel-inner">
-        <div class="sec-title">
+    <section class="sec anchor" id="place">
+      <div class="inner">
+        <div class="st">
           <h2>장소·지도</h2>
           <p>천안시청소년복합커뮤니티센터 1층 대공연장</p>
         </div>
 
         <div class="two">
-          <div class="panel" style="box-shadow:none">
-            <div class="panel-inner">
+          <div class="sec" style="box-shadow:none;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02)">
+            <div class="inner" style="padding:18px 16px">
               <ul class="list" style="margin-top:0">
                 <li>공연일시: 2026. 1. 31. (토) 17시</li>
                 <li>공연장소: 천안시청소년복합커뮤니티센터 1층 대공연장</li>
@@ -771,129 +727,119 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- SUPPORT -->
-    <div class="panel anchor" id="support" style="margin-top:18px">
-      <div class="panel-inner">
-        <div class="sec-title">
+    <section class="sec anchor" id="support">
+      <div class="inner">
+        <div class="st">
           <h2>후원·제작</h2>
           <p>후원·제작 표기 로고입니다.</p>
         </div>
 
         <div class="logos">
-          <div class="logo-item"><img data-src="logo-cheonanfoundation.png" alt="천안문화재단 로고" /></div>
-          <div class="logo-item"><img data-src="logo-youthhub.png" alt="천안시청소년복합커뮤니티센터 로고" /></div>
-          <div class="logo-item"><img data-src="logo-theheungcompany.png" alt="더흥컴퍼니 로고" /></div>
-          <div class="logo-item"><img data-src="logo-clartwork.png" alt="CL artwork 로고" /></div>
+          <div class="logo"><img data-src="logo-cheonanfoundation.png" alt="천안문화재단" /></div>
+          <div class="logo"><img data-src="logo-youthhub.png" alt="천안시청소년복합커뮤니티센터" /></div>
+          <div class="logo"><img data-src="logo-theheungcompany.png" alt="더흥컴퍼니" /></div>
+          <div class="logo"><img data-src="logo-clartwork.png" alt="CL artwork" /></div>
         </div>
 
-        <footer>
-          본 사업은 2025년도 천안문화재단 문화예술보조금을 지원받아 진행됩니다.
-        </footer>
+        <footer>본 사업은 2025년도 천안문화재단 문화예술보조금을 지원받아 진행됩니다.</footer>
       </div>
-    </div>
-
+    </section>
   </main>
 
   <!-- Lightbox -->
-  <div class="lb" id="lightbox" aria-hidden="true">
-    <div class="lb-inner" role="dialog" aria-modal="true">
-      <div class="lb-top">
-        <div id="lbTitle">이미지 크게 보기</div>
-        <button class="lb-close" id="lbClose" type="button">닫기</button>
+  <div class="lb" id="lb" aria-hidden="true">
+    <div class="lbinner" role="dialog" aria-modal="true">
+      <div class="lbh">
+        <div id="lbt">이미지 크게 보기</div>
+        <button class="x" id="lbx" type="button">닫기</button>
       </div>
-      <div class="lb-body">
-        <img id="lbImg" alt="확대 이미지" />
+      <div class="lbb">
+        <img id="lbi" alt="확대 이미지" />
       </div>
     </div>
   </div>
 
   <script>
-    /* 앵커 스크롤(모바일 안정) */
+    /* 앵커 스크롤 */
     (function(){
-      function headerHeight(){
-        var v = getComputedStyle(document.documentElement).getPropertyValue('--headerH').trim();
-        var n = parseInt(v, 10);
-        return isNaN(n) ? 70 : n;
+      function hdr(){
+        var v = getComputedStyle(document.documentElement).getPropertyValue('--hdr').trim();
+        var n = parseInt(v,10);
+        return isNaN(n) ? 72 : n;
       }
-      function scrollToId(id){
+      function go(id){
         var el = document.getElementById(id);
         if(!el) return;
-        var top = el.getBoundingClientRect().top + window.pageYOffset - headerHeight() - 10;
+        var top = el.getBoundingClientRect().top + window.pageYOffset - hdr() - 10;
         window.scrollTo({ top: top, behavior: 'smooth' });
       }
       document.querySelectorAll('a[href^="#"]').forEach(function(a){
         a.addEventListener('click', function(e){
-          var hash = a.getAttribute('href');
-          if(!hash || hash.length < 2) return;
+          var h = a.getAttribute('href');
+          if(!h || h.length < 2) return;
           e.preventDefault();
-          var id = hash.slice(1);
-          history.pushState(null, '', hash);
-          scrollToId(id);
-        }, { passive:false });
+          var id = h.slice(1);
+          history.pushState(null,'',h);
+          go(id);
+        }, {passive:false});
       });
       if(location.hash && location.hash.length > 1){
-        var id = location.hash.slice(1);
-        setTimeout(function(){ scrollToId(id); }, 120);
+        setTimeout(function(){ go(location.hash.slice(1)); }, 100);
       }
     })();
 
-    /* 이미지 경로 폴백: 루트 실패 시 images/ -> assets/ 순서로 시도 */
+    /* 이미지 경로 폴백: 루트 -> images/ -> assets/ */
     (function(){
       var prefixes = ["", "images/", "assets/"];
-
-      function tryLoad(img, filename){
+      function load(img, name){
         var i = 0;
         function next(){
           if(i >= prefixes.length){
             img.alt = (img.alt || "이미지") + " (파일을 찾지 못했습니다)";
             return;
           }
-          img.src = prefixes[i] + filename;
+          img.src = prefixes[i] + name;
           i++;
         }
         img.onerror = next;
         next();
       }
-
       document.querySelectorAll('img[data-src]').forEach(function(img){
         var name = img.getAttribute('data-src');
-        if(name) tryLoad(img, name);
+        if(name) load(img, name);
       });
     })();
 
-    /* 라이트박스 확대 보기 */
+    /* 라이트박스 */
     (function(){
-      var lb = document.getElementById('lightbox');
-      var lbImg = document.getElementById('lbImg');
-      var lbTitle = document.getElementById('lbTitle');
-      var closeBtn = document.getElementById('lbClose');
+      var lb = document.getElementById('lb');
+      var lbi = document.getElementById('lbi');
+      var lbt = document.getElementById('lbt');
+      var lbx = document.getElementById('lbx');
+      var prefixes = ["", "images/", "assets/"];
 
-      function open(srcName, title){
-        lbTitle.textContent = title || "이미지 크게 보기";
+      function open(src, title){
+        lbt.textContent = title || "이미지 크게 보기";
         lb.classList.add('open');
-        lb.setAttribute('aria-hidden', 'false');
-
-        // 폴백 포함 로딩
-        var prefixes = ["", "images/", "assets/"];
+        lb.setAttribute('aria-hidden','false');
         var i = 0;
         function next(){
           if(i >= prefixes.length){
-            lbImg.alt = "이미지 파일을 찾지 못했습니다";
+            lbi.alt = "이미지 파일을 찾지 못했습니다";
             return;
           }
-          lbImg.src = prefixes[i] + srcName;
+          lbi.src = prefixes[i] + src;
           i++;
         }
-        lbImg.onerror = next;
+        lbi.onerror = next;
         next();
       }
-
       function close(){
         lb.classList.remove('open');
-        lb.setAttribute('aria-hidden', 'true');
-        lbImg.src = "";
+        lb.setAttribute('aria-hidden','true');
+        lbi.src = "";
       }
 
       document.querySelectorAll('[data-zoom]').forEach(function(el){
@@ -904,13 +850,9 @@
         });
       });
 
-      closeBtn.addEventListener('click', close);
-      lb.addEventListener('click', function(e){
-        if(e.target === lb) close();
-      });
-      document.addEventListener('keydown', function(e){
-        if(e.key === 'Escape') close();
-      });
+      lbx.addEventListener('click', close);
+      lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
     })();
   </script>
 </body>
