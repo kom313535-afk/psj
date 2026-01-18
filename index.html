@@ -1,774 +1,924 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
   <title>박상진 첫 번째 피리 독주회</title>
 
   <style>
     :root{
-      --bg0:#05070b;
-      --bg1:#070b12;
-      --ink:rgba(255,255,255,0.92);
-      --sub:rgba(255,255,255,0.70);
-      --sub2:rgba(255,255,255,0.55);
-      --line:rgba(255,255,255,0.10);
-      --card:rgba(255,255,255,0.055);
-      --card2:rgba(255,255,255,0.032);
-      --accent:rgba(175,205,255,0.95);
-      --max:1180px;
-      --hdr:66px;
-      --r1:18px;
-      --r2:24px;
-      --shadow: 0 18px 54px rgba(0,0,0,0.55);
-      --shadow2: 0 10px 26px rgba(0,0,0,0.42);
+      --bg0:#060a12;
+      --bg1:#0a1020;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.10);
+      --stroke2: rgba(255,255,255,.14);
+      --text:#eef2ff;
+      --muted: rgba(238,242,255,.72);
+      --muted2: rgba(238,242,255,.60);
+      --accent: rgba(145,196,255,.95);
+      --accent2: rgba(145,196,255,.25);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 20px;
+      --radius2: 28px;
+      --max: 1120px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      color:var(--ink);
-      font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",Roboto,Arial,sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
       background:
-        radial-gradient(1200px 720px at 20% 8%, rgba(85,135,220,0.18), rgba(0,0,0,0) 58%),
-        radial-gradient(980px 620px at 82% 14%, rgba(180,215,255,0.10), rgba(0,0,0,0) 60%),
-        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 45%, #070b12 100%);
-      letter-spacing:-0.2px;
+        radial-gradient(1000px 600px at 20% 10%, rgba(88,130,255,.20), transparent 55%),
+        radial-gradient(900px 550px at 85% 15%, rgba(0,194,255,.12), transparent 58%),
+        radial-gradient(900px 650px at 50% 110%, rgba(145,196,255,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
     }
 
-    a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%}
+    a{ color: inherit; text-decoration:none; }
+    img{ max-width:100%; display:block; }
 
-    /* HEADER: CTA는 항상 고정 노출 */
-    header{
-      position:sticky;
-      top:0;
-      z-index:60;
-      height:var(--hdr);
-      backdrop-filter: blur(14px);
-      background: rgba(5,7,11,0.68);
-      border-bottom:1px solid rgba(255,255,255,0.08);
+    .wrap{
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 18px 0 56px;
     }
-    .hwrap{
-      max-width:var(--max);
-      height:100%;
-      margin:0 auto;
-      padding:0 14px;
+
+    /* Header */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(6,10,18,.70);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .head{
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 12px 0;
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap:10px;
+      justify-content: space-between;
+      gap: 14px;
     }
+
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
-      min-width:0;
-      flex:1 1 auto;
+      gap: 10px;
+      min-width: 220px;
     }
-    .mark{
-      width:40px;height:40px;
-      border-radius:12px;
-      background: linear-gradient(135deg, rgba(170,210,255,0.18), rgba(255,255,255,0.05));
-      border:1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.35);
-      display:flex;align-items:center;justify-content:center;
-      font-weight:950;
-      color:rgba(255,255,255,0.88);
-      flex:0 0 auto;
+    .brand .mark{
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
     }
-    .btxt{min-width:0}
-    .btxt .t{
-      margin:0;
-      font-weight:950;
-      font-size: 14px;
+    .brand .mark img{
+      width: 28px; height: 28px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
+    }
+    .brand .title{
+      display:flex;
+      flex-direction:column;
       line-height:1.15;
-      overflow:hidden;
-      display:-webkit-box;
-      -webkit-line-clamp:1;
-      -webkit-box-orient:vertical;
-      white-space:nowrap;
-      text-overflow:ellipsis;
     }
-    .btxt .d{
-      margin-top:4px;
+    .brand .title b{
+      font-size: 14px;
+      letter-spacing: -.2px;
+    }
+    .brand .title span{
       font-size: 12px;
-      color:var(--sub2);
-      white-space:nowrap;
+      color: var(--muted2);
+      margin-top: 2px;
+      white-space: nowrap;
       overflow:hidden;
-      text-overflow:ellipsis;
+      text-overflow: ellipsis;
+      max-width: 240px;
     }
+
+    .nav{
+      display:flex;
+      gap: 8px;
+      align-items:center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav a{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(238,242,255,.86);
+      font-size: 13px;
+      letter-spacing: -.2px;
+      transition: .15s ease;
+      user-select:none;
+    }
+    .nav a:hover{ background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.16); }
 
     .cta{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(175,205,255,0.46);
-      background: rgba(175,205,255,0.16);
-      font-size:13px;
-      font-weight:950;
-      white-space:nowrap;
-      flex:0 0 auto;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-    }
-    .cta:active{transform:translateY(1px)}
-
-    /* 탭: CTA와 분리, 아래로 내려서 스크롤 가능 */
-    .tabs{
-      max-width:var(--max);
-      margin: 10px auto 0;
-      padding: 0 14px;
       display:flex;
-      gap:10px;
-      overflow-x:auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width:none;
+      align-items:center;
+      gap: 10px;
+      min-width: 220px;
+      justify-content: flex-end;
     }
-    .tabs::-webkit-scrollbar{display:none}
-    .tab{
-      flex:0 0 auto;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
       padding: 10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.05);
-      color: rgba(255,255,255,0.82);
-      font-size:13px;
-      font-weight:900;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(145,196,255,.18), rgba(145,196,255,.08));
+      border: 1px solid rgba(145,196,255,.28);
+      color: rgba(238,242,255,.92);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: -.2px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.35);
+      transition: .15s ease;
+      user-select:none;
       white-space:nowrap;
     }
-    .tab:active{transform:translateY(1px)}
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(145,196,255,.38); }
 
-    main{
-      max-width:var(--max);
-      margin:0 auto;
-      padding: 14px 14px 84px;
-    }
-    .anchor{scroll-margin-top: calc(var(--hdr) + 56px);}
-
-    /* HERO: 포스터만 크게, 오버레이 텍스트 없음 */
-    .poster{
-      border-radius: var(--r2);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.10);
-      box-shadow: var(--shadow);
-      background: rgba(255,255,255,0.03);
-      cursor: zoom-in;
-    }
-    .poster img{
-      width:100%;
-      height: min(76vh, 760px);
-      object-fit: cover;
-      object-position: center;
+    .hamburger{
+      display:none;
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(238,242,255,.88);
+      cursor:pointer;
     }
 
-    /* KEY INFO */
-    .kwrap{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
+    /* Mobile menu */
+    .mnav{
+      display:none;
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(6,10,18,.88);
     }
-    .kcard{
-      border-radius: var(--r1);
-      border:1px solid rgba(255,255,255,0.10);
-      background: linear-gradient(180deg, var(--card), var(--card2));
-      box-shadow: var(--shadow2);
-      padding: 14px 14px;
-      min-width:0;
-    }
-    .k{font-size:12px;color:var(--sub2);margin-bottom:8px}
-    .v{
-      font-weight:950;
-      font-size:14px;
-      line-height:1.35;
-      color:rgba(255,255,255,0.92);
-      word-break:keep-all;
-    }
-
-    /* SECTION */
-    .sec{
-      margin-top: 18px;
-      border-radius: var(--r2);
-      border:1px solid rgba(255,255,255,0.10);
-      background: linear-gradient(180deg, rgba(255,255,255,0.050), rgba(255,255,255,0.028));
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-    }
-    .inner{padding: 20px 18px;}
-    .st{
+    .mnav .inner{
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 10px 0 14px;
       display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:14px;
-      padding-bottom:12px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items:center;
     }
-    .st h2{
-      margin:0;
-      font-size:18px;
-      letter-spacing:-0.4px;
-      font-weight:950;
+    .mnav a{ padding: 10px 12px; border-radius: 999px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10); font-size: 13px; }
+    .mnav .btn{ margin-left: auto; }
+
+    /* Sections */
+    section{ padding: 22px 0; }
+    .section-title{
+      display:flex; align-items: baseline; justify-content: space-between; gap: 14px;
+      margin: 0 0 12px;
     }
-    .st p{
+    .section-title h2{
       margin:0;
-      font-size:13px;
-      color:var(--sub2);
-      line-height:1.45;
-      text-align:right;
-      word-break:keep-all;
+      font-size: 18px;
+      letter-spacing: -.3px;
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted2);
+      font-size: 13px;
     }
 
-    .list{
-      margin:0;
-      padding-left:18px;
-      line-height:1.85;
-      color: rgba(255,255,255,0.86);
-      font-size:14px;
-      word-break:keep-all;
-    }
-    .list li{margin:6px 0}
-
-    .note{
-      margin-top: 12px;
-      color:var(--sub2);
-      font-size:12px;
-      line-height:1.7;
-      word-break:keep-all;
-    }
-
-    /* IMAGES */
-    .frame{
-      border-radius: var(--r1);
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.03);
+    .card{
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
       overflow:hidden;
-      cursor: zoom-in;
     }
-    .frame img{
-      width:100%;
-      height:100%;
-      object-fit: contain;
-      object-position: center;
-      background: rgba(255,255,255,0.02);
+    .card-pad{ padding: 18px; }
+
+    /* Poster hero */
+    .hero{
+      padding-top: 22px;
     }
 
-    /* SOLO */
+    .poster-wrap{
+      border-radius: 30px;
+      overflow:hidden;
+      position: relative;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 24px 80px rgba(0,0,0,.55);
+    }
+    .poster-wrap img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    .poster-overlay{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding: 16px;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+      display:flex;
+      gap: 10px;
+      align-items:flex-end;
+      justify-content: space-between;
+    }
+    .poster-overlay .left{
+      display:flex;
+      flex-direction:column;
+      gap: 6px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(238,242,255,.92);
+      font-size: 12px;
+      letter-spacing: -.2px;
+    }
+    .poster-overlay .title{
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -.6px;
+      margin: 0;
+    }
+    .poster-overlay .meta{
+      color: rgba(238,242,255,.84);
+      font-size: 13px;
+      margin: 0;
+      letter-spacing: -.2px;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .info-list{
+      display:grid;
+      gap: 10px;
+    }
+    .info-item{
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .info-item small{
+      display:block;
+      color: var(--muted2);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .info-item b{
+      display:block;
+      font-size: 15px;
+      letter-spacing: -.3px;
+      line-height: 1.35;
+    }
+
+    .apply-card .btn{
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+    .apply-card .hint{
+      margin-top: 10px;
+      color: var(--muted2);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    /* Text blocks */
+    .prose{
+      color: rgba(238,242,255,.82);
+      line-height: 1.75;
+      font-size: 14px;
+      letter-spacing: -.15px;
+    }
+
+    .prose ul{ margin: 10px 0 0 18px; padding:0; }
+    .prose li{ margin: 6px 0; }
+
+    /* Profiles */
     .solo{
       display:grid;
-      grid-template-columns: 360px 1fr;
-      gap:16px;
-      align-items:stretch;
+      grid-template-columns: 280px 1fr;
+      gap: 16px;
+      align-items: stretch;
     }
-    .solo .frame{min-height: 520px}
-    .sinfo{
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      min-width:0;
+    .portrait{
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      min-height: 360px;
+      position: relative;
     }
-    .role{
-      font-size:12px;
-      font-weight:950;
-      color: var(--accent);
-    }
-    .name{
-      margin:10px 0 0;
-      font-size:28px;
-      font-weight:950;
-      letter-spacing:-0.8px;
+    .portrait img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: 50% 18%;
+      transform: translateZ(0);
     }
 
-    /* CAST */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
+    .profile-meta h3{
+      margin: 0 0 6px;
+      font-size: 18px;
+      letter-spacing: -.3px;
     }
-    .card{
-      border-radius: var(--r1);
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.03);
+    .profile-meta .role{
+      margin: 0 0 10px;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .bullets{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(238,242,255,.84);
+      line-height: 1.65;
+      font-size: 13px;
+    }
+    .bullets li{ margin: 6px 0; }
+
+    /* Cast grid */
+    .cast-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .cast{
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .cast .img{
+      aspect-ratio: 4 / 5;
+      background: rgba(255,255,255,.02);
       overflow:hidden;
     }
-    .ph{
-      height: 260px;
-      border-bottom:1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-      padding:10px;
+    .cast .img img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: 50% 22%;
+    }
+    .cast .txt{
+      padding: 12px 12px 14px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .cast .name{
+      font-weight: 900;
+      letter-spacing: -.3px;
+      margin: 0 0 4px;
+      font-size: 14px;
+    }
+    .cast .inst{
+      margin: 0;
+      color: var(--muted2);
+      font-size: 12px;
+    }
+
+    /* Pamphlet */
+    .pam-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .pam{
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      position: relative;
       cursor: zoom-in;
     }
-    .ph img{
-      width:100%;
-      height:100%;
-      object-fit: contain;
-      object-position: center;
-    }
-    .tx{padding: 12px 12px 14px;}
-    .inst{
-      font-size:12px;
-      font-weight:950;
-      color: var(--accent);
-      margin-bottom:6px;
-    }
-    .nm{
-      margin:0;
-      font-size:15px;
-      font-weight:950;
-      letter-spacing:-0.2px;
+    .pam .cap{
+      position:absolute;
+      inset:auto 10px 10px 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(238,242,255,.90);
+      font-size: 12px;
+      width: fit-content;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
-    /* PAMPHLET */
-    .pgrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-    }
-    .pframe{min-height: 560px}
-
-    /* PLACE */
-    .two{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    .map{
-      border-radius: var(--r1);
-      border:1px solid rgba(255,255,255,0.10);
-      overflow:hidden;
-      background: rgba(255,255,255,0.02);
-      min-height: 420px;
-    }
-    iframe{width:100%;height:100%;border:0;display:block}
-
-    /* LOGOS */
+    /* Sponsors */
     .logos{
       display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      align-items:center;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
     }
     .logo{
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      padding: 12px 14px;
-      min-height: 76px;
+      height: 56px; /* 기준 높이 */
+      padding: 10px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
       display:flex;
       align-items:center;
       justify-content:center;
     }
-    .logo img{height:52px;width:auto;filter: drop-shadow(0 10px 18px rgba(0,0,0,0.30));}
-
-    footer{
-      margin-top: 14px;
-      color: rgba(255,255,255,0.54);
-      font-size:12px;
-      line-height:1.7;
-      word-break:keep-all;
+    .logo img{
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      max-width: 320px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
     }
 
-    /* LIGHTBOX */
-    .lb{
-      position:fixed;
-      inset:0;
-      background: rgba(0,0,0,0.82);
+    /* Footer */
+    footer{
+      padding: 26px 0 40px;
+      color: var(--muted2);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align:center;
+    }
+
+    /* Modal */
+    .modal{
+      position: fixed;
+      inset: 0;
       display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:999;
+      place-items: center;
+      background: rgba(0,0,0,.68);
+      z-index: 200;
       padding: 18px;
     }
-    .lb.open{display:flex;}
-    .lbinner{
-      width:min(1100px, 98vw);
-      height:min(92vh, 920px);
-      border-radius: 16px;
+    .modal.open{ display:grid; }
+    .modal .box{
+      width: min(1100px, 100%);
+      border-radius: 18px;
       overflow:hidden;
-      border:1px solid rgba(255,255,255,0.14);
-      background: rgba(10,14,20,0.92);
-      box-shadow: 0 22px 70px rgba(0,0,0,0.62);
-      display:flex;
-      flex-direction:column;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(10,16,32,.92);
+      box-shadow: 0 30px 120px rgba(0,0,0,.65);
+      position: relative;
     }
-    .lbh{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding: 10px 12px;
-      border-bottom:1px solid rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.80);
-      font-size:12px;
-    }
-    .x{
-      border:1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.92);
-      border-radius: 10px;
-      padding: 8px 10px;
-      cursor:pointer;
-      font-weight:900;
-      white-space:nowrap;
-    }
-    .lbb{
-      flex:1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px;
-    }
-    .lbb img{
+    .modal .box img{
       width:100%;
-      height:100%;
-      object-fit: contain;
-      object-position:center;
+      height:auto;
+      display:block;
+    }
+    .modal .close{
+      position:absolute;
+      top: 10px;
+      right: 10px;
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(238,242,255,.95);
+      cursor:pointer;
     }
 
-    @media (max-width: 1100px){
-      .two{grid-template-columns:1fr}
-      .solo{grid-template-columns: 1fr}
-      .grid{grid-template-columns: repeat(2, 1fr)}
-      .pgrid{grid-template-columns:1fr}
-      .poster img{height: min(78vh, 820px);}
-      .solo .frame{min-height: 480px}
-      .pframe{min-height: 520px}
+    /* Responsive */
+    @media (max-width: 980px){
+      .grid2{ grid-template-columns: 1fr; }
+      .solo{ grid-template-columns: 1fr; }
+      .portrait{ min-height: 420px; }
+      .cast-grid{ grid-template-columns: repeat(2, 1fr); }
+      .pam-grid{ grid-template-columns: 1fr; }
+      .nav{ display:none; }
+      .hamburger{ display:inline-grid; place-items:center; }
+      .cta{ min-width: auto; }
+      .brand{ min-width: auto; }
+      .brand .title span{ max-width: 180px; }
     }
-    @media (max-width: 560px){
-      .kwrap{grid-template-columns:1fr}
-      .grid{grid-template-columns: 1fr}
-      .poster img{height: min(82vh, 860px);}
-      .solo .frame{min-height: 460px}
-      .pframe{min-height: 480px}
+
+    @media (max-width: 420px){
+      .wrap{ width: calc(100% - 28px); }
+      .head{ width: calc(100% - 28px); }
+      .brand .title span{ display:none; }
+      .poster-overlay .title{ font-size: 18px; }
+      .logo{ height: 52px; }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="hwrap">
-      <div class="brand">
-        <div class="mark">興</div>
-        <div class="btxt">
-          <div class="t">박상진 첫 번째 피리 독주회</div>
-          <div class="d">2026. 01. 31. (토) 17:00</div>
-        </div>
+
+<header>
+  <div class="head">
+    <div class="brand">
+      <div class="mark" aria-hidden="true">
+        <img src="logo-heung.png" alt="興" />
       </div>
-      <a class="cta" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
+      <div class="title">
+        <b>박상진 첫 번째 피리 독주회</b>
+        <span>2026. 01. 31. (토) 17:00</span>
+      </div>
     </div>
-    <div class="tabs" aria-label="메뉴">
-      <a class="tab" href="#top">포스터</a>
-      <a class="tab" href="#info">공연 안내</a>
-      <a class="tab" href="#solo">독주자</a>
-      <a class="tab" href="#cast">출연진</a>
-      <a class="tab" href="#pamphlet">팜플렛</a>
-      <a class="tab" href="#place">장소·지도</a>
-      <a class="tab" href="#support">후원·제작</a>
-    </div>
-  </header>
 
-  <main>
-    <!-- 1) 첫 화면: 포스터만 -->
-    <section class="anchor" id="top">
-      <div class="poster" data-zoom="poster.png" data-title="포스터 크게 보기">
-        <img data-src="poster.png" alt="공연 포스터" />
-      </div>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#poster">포스터</a>
+      <a href="#notice">공연 안내</a>
+      <a href="#soloist">독주자</a>
+      <a href="#cast">출연진</a>
+      <a href="#pamphlet">팜플렛</a>
+      <a href="#map">장소·지도</a>
+      <a href="#sponsor">후원·제작</a>
+    </nav>
 
-      <!-- 멘트는 빼고, 핵심 정보만 -->
-      <div class="kwrap" aria-label="핵심 정보">
-        <div class="kcard">
-          <div class="k">공연 일시</div>
-          <div class="v">2026. 01. 31. (토) 17:00</div>
-        </div>
-        <div class="kcard">
-          <div class="k">공연 장소</div>
-          <div class="v">천안시청소년복합커뮤니티센터 1층 대공연장</div>
-        </div>
-        <div class="kcard">
-          <div class="k">관람 안내</div>
-          <div class="v">전석 무료 관람</div>
-        </div>
-        <div class="kcard">
-          <div class="k">사전신청</div>
-          <div class="v">네이버폼 접수</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec anchor" id="info">
-      <div class="inner">
-        <div class="st">
-          <h2>공연 안내</h2>
-          <p>공지문 원문 기준으로만 표기합니다.</p>
-        </div>
-
-        <ul class="list">
-          <li>2026년 1월 31일 토요일 17시에 천안시청소년복합커뮤니티센터 1층 대공연장에서 개최됩니다.</li>
-          <li>천안시민·청소년 누구나 무료 관람이 가능합니다.</li>
-          <li>사전 신청 시 보다 여유롭고 가까운 자리에서 공연을 관람하실 수 있습니다.</li>
-          <li>관람석 200석 사전신청을 통한 선예약이 진행되며, 신청 시 대표자 연락처로 확정 문자를 보내드립니다.</li>
-          <li>본행사 당일 공연장 우선 입장과 좌석 안내를 도와드리며, 지정좌석제가 아닙니다.</li>
-          <li>사전신청 200석 외 당일 현장접수로도 관람이 가능합니다.</li>
-        </ul>
-
-        <div class="note">
-          신청기간: 사전예약좌석 200석 마감까지<br>
-          지원방법: 네이버폼 사전신청서 제출 (https://naver.me/xcA1pVbg)<br>
-          문 의: 교육사업팀 041-557-0924
-        </div>
-      </div>
-    </section>
-
-    <section class="sec anchor" id="solo">
-      <div class="inner">
-        <div class="st">
-          <h2>독주자</h2>
-          <p>이미지 잘림 방지: contain 적용</p>
-        </div>
-
-        <div class="solo">
-          <div class="frame" data-zoom="profile-park.png" data-title="독주자 프로필 크게 보기" style="min-height:520px">
-            <img data-src="profile-park.png" alt="피리 연주자 박상진 프로필" />
-          </div>
-
-          <div class="sinfo">
-            <div class="role">피리</div>
-            <div class="name">박상진</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec anchor" id="cast">
-      <div class="inner">
-        <div class="st">
-          <h2>출연진</h2>
-          <p>독주회 참여 출연진</p>
-        </div>
-
-        <div class="grid">
-          <div class="card">
-            <div class="ph" data-zoom="profile-gayageum.png" data-title="가야금 프로필 크게 보기">
-              <img data-src="profile-gayageum.png" alt="가야금 이현주" />
-            </div>
-            <div class="tx"><div class="inst">가야금</div><p class="nm">이현주</p></div>
-          </div>
-
-          <div class="card">
-            <div class="ph" data-zoom="profile-haegeum.png" data-title="해금 프로필 크게 보기">
-              <img data-src="profile-haegeum.png" alt="해금 조소연" />
-            </div>
-            <div class="tx"><div class="inst">해금</div><p class="nm">조소연</p></div>
-          </div>
-
-          <div class="card">
-            <div class="ph" data-zoom="profile-daegum.png" data-title="대금 프로필 크게 보기">
-              <img data-src="profile-daegum.png" alt="대금 김진수" />
-            </div>
-            <div class="tx"><div class="inst">대금</div><p class="nm">김진수</p></div>
-          </div>
-
-          <div class="card">
-            <div class="ph" data-zoom="profile-ajaeng.png" data-title="아쟁 프로필 크게 보기">
-              <img data-src="profile-ajaeng.png" alt="아쟁 김명신" />
-            </div>
-            <div class="tx"><div class="inst">아쟁</div><p class="nm">김명신</p></div>
-          </div>
-
-          <div class="card">
-            <div class="ph" data-zoom="profile-perc.png" data-title="타악 프로필 크게 보기">
-              <img data-src="profile-perc.png" alt="타악 한유림" />
-            </div>
-            <div class="tx"><div class="inst">타악</div><p class="nm">한유림</p></div>
-          </div>
-
-          <div class="card">
-            <div class="ph" data-zoom="profile-seodo.png" data-title="서도소리 프로필 크게 보기">
-              <img data-src="profile-seodo.png" alt="서도소리 박래송" />
-            </div>
-            <div class="tx"><div class="inst">서도소리</div><p class="nm">박래송</p></div>
-          </div>
-
-          <div class="card">
-            <div class="ph" data-zoom="profile-namdo.png" data-title="남도소리 프로필 크게 보기">
-              <img data-src="profile-namdo.png" alt="남도소리 이혜원" />
-            </div>
-            <div class="tx"><div class="inst">남도소리</div><p class="nm">이혜원</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec anchor" id="pamphlet">
-      <div class="inner">
-        <div class="st">
-          <h2>팜플렛</h2>
-          <p>크게 보기 지원</p>
-        </div>
-
-        <div class="pgrid">
-          <div class="frame pframe" data-zoom="pamphlet-a.png" data-title="팜플렛 A면 크게 보기">
-            <img data-src="pamphlet-a.png" alt="팜플렛 A면" />
-          </div>
-          <div class="frame pframe" data-zoom="pamphlet-b.png" data-title="팜플렛 B면 크게 보기">
-            <img data-src="pamphlet-b.png" alt="팜플렛 B면" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec anchor" id="place">
-      <div class="inner">
-        <div class="st">
-          <h2>장소·지도</h2>
-          <p>천안시청소년복합커뮤니티센터 1층 대공연장</p>
-        </div>
-
-        <div class="two">
-          <div class="sec" style="box-shadow:none;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02)">
-            <div class="inner" style="padding:18px 16px">
-              <ul class="list" style="margin-top:0">
-                <li>공연장소: 천안시청소년복합커뮤니티센터 1층 대공연장</li>
-                <li>공연일시: 2026. 1. 31. (토) 17시</li>
-                <li>문 의: 교육사업팀 041-557-0924</li>
-              </ul>
-              <div class="note">사전신청은 상단 “사전신청” 버튼으로 접속합니다.</div>
-            </div>
-          </div>
-
-          <div class="map">
-            <iframe
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=%EC%B2%9C%EC%95%88%EC%8B%9C%EC%B2%AD%EC%86%8C%EB%85%84%EB%B3%B5%ED%95%A9%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%EC%84%BC%ED%84%B0&output=embed">
-            </iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec anchor" id="support">
-      <div class="inner">
-        <div class="st">
-          <h2>후원·제작</h2>
-          <p>logo-heung는 후원 로고로 쓰지 않습니다.</p>
-        </div>
-
-        <div class="logos">
-          <div class="logo"><img data-src="logo-cheonanfoundation.png" alt="천안문화재단" /></div>
-          <div class="logo"><img data-src="logo-youthhub.png" alt="천안시청소년복합커뮤니티센터" /></div>
-          <div class="logo"><img data-src="logo-theheungcompany.png" alt="더흥컴퍼니" /></div>
-          <div class="logo"><img data-src="logo-clartwork.png" alt="CL artwork" /></div>
-        </div>
-
-        <footer>본 사업은 2025년도 천안문화재단 문화예술보조금을 지원받아 진행됩니다.</footer>
-      </div>
-    </section>
-  </main>
-
-  <!-- Lightbox -->
-  <div class="lb" id="lb" aria-hidden="true">
-    <div class="lbinner" role="dialog" aria-modal="true">
-      <div class="lbh">
-        <div id="lbt">이미지 크게 보기</div>
-        <button class="x" id="lbx" type="button">닫기</button>
-      </div>
-      <div class="lbb">
-        <img id="lbi" alt="확대 이미지" />
-      </div>
+    <div class="cta">
+      <a class="btn" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
+      <button class="hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">≡</button>
     </div>
   </div>
 
-  <script>
-    /* 앵커 스크롤 */
-    (function(){
-      function go(id){
-        var el = document.getElementById(id);
-        if(!el) return;
-        var top = el.getBoundingClientRect().top + window.pageYOffset - 120;
-        window.scrollTo({ top: top, behavior: 'smooth' });
-      }
-      document.querySelectorAll('a[href^="#"]').forEach(function(a){
-        a.addEventListener('click', function(e){
-          var h = a.getAttribute('href');
-          if(!h || h.length < 2) return;
-          e.preventDefault();
-          var id = h.slice(1);
-          history.pushState(null,'',h);
-          go(id);
-        }, {passive:false});
-      });
-      if(location.hash && location.hash.length > 1){
-        setTimeout(function(){ go(location.hash.slice(1)); }, 100);
-      }
-    })();
+  <div class="mnav" id="mnav">
+    <div class="inner">
+      <a href="#poster">포스터</a>
+      <a href="#notice">공연 안내</a>
+      <a href="#soloist">독주자</a>
+      <a href="#cast">출연진</a>
+      <a href="#pamphlet">팜플렛</a>
+      <a href="#map">장소·지도</a>
+      <a href="#sponsor">후원·제작</a>
+      <a class="btn" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
+    </div>
+  </div>
+</header>
 
-    /* 이미지 경로 폴백: 루트 -> images/ -> assets/ */
-    (function(){
-      var prefixes = ["", "images/", "assets/"];
-      function load(img, name){
-        var i = 0;
-        function next(){
-          if(i >= prefixes.length){
-            img.alt = (img.alt || "이미지") + " (파일을 찾지 못했습니다)";
-            return;
-          }
-          img.src = prefixes[i] + name;
-          i++;
-        }
-        img.onerror = next;
-        next();
-      }
-      document.querySelectorAll('img[data-src]').forEach(function(img){
-        var name = img.getAttribute('data-src');
-        if(name) load(img, name);
-      });
-    })();
+<main class="wrap">
 
-    /* 라이트박스 */
-    (function(){
-      var lb = document.getElementById('lb');
-      var lbi = document.getElementById('lbi');
-      var lbt = document.getElementById('lbt');
-      var lbx = document.getElementById('lbx');
-      var prefixes = ["", "images/", "assets/"];
+  <!-- HERO / POSTER FIRST -->
+  <section class="hero" id="poster">
+    <div class="poster-wrap">
+      <img src="poster.png" alt="박상진 첫 번째 피리 독주회 포스터" />
+      <div class="poster-overlay">
+        <div class="left">
+          <div class="chip">2026년 첫 번째 국악콘서트 · 무료 관람</div>
+          <p class="title">박상진 첫 번째 피리 독주회</p>
+          <p class="meta">2026. 01. 31. (토) 17:00 · 천안시청소년복합커뮤니티센터 1층 대공연장</p>
+        </div>
+        <a class="btn" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
+      </div>
+    </div>
 
-      function open(src, title){
-        lbt.textContent = title || "이미지 크게 보기";
-        lb.classList.add('open');
-        lb.setAttribute('aria-hidden','false');
-        var i = 0;
-        function next(){
-          if(i >= prefixes.length){
-            lbi.alt = "이미지 파일을 찾지 못했습니다";
-            return;
-          }
-          lbi.src = prefixes[i] + src;
-          i++;
-        }
-        lbi.onerror = next;
-        next();
-      }
-      function close(){
-        lb.classList.remove('open');
-        lb.setAttribute('aria-hidden','true');
-        lbi.src = "";
-      }
+    <div class="grid2">
+      <div class="card card-pad">
+        <div class="section-title" style="margin-bottom:10px;">
+          <h2>공연 요약</h2>
+          <p>무료 관람 · 사전신청 가능</p>
+        </div>
 
-      document.querySelectorAll('[data-zoom]').forEach(function(el){
-        el.addEventListener('click', function(){
-          var src = el.getAttribute('data-zoom');
-          var title = el.getAttribute('data-title') || "이미지 크게 보기";
-          if(src) open(src, title);
-        });
-      });
+        <div class="info-list">
+          <div class="info-item">
+            <small>공연 일시</small>
+            <b>2026. 01. 31. (토) 17:00</b>
+          </div>
+          <div class="info-item">
+            <small>공연 장소</small>
+            <b>천안시청소년복합커뮤니티센터 1층 대공연장</b>
+          </div>
+          <div class="info-item">
+            <small>관람 안내</small>
+            <b>천안시민·청소년 누구나 무료로 관람 가능합니다.</b>
+          </div>
+          <div class="info-item">
+            <small>사전신청</small>
+            <b>네이버폼을 통해 접수됩니다.</b>
+          </div>
+        </div>
+      </div>
 
-      lbx.addEventListener('click', close);
-      lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
-      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
-    })();
-  </script>
+      <div class="card card-pad apply-card" id="apply">
+        <div class="section-title" style="margin-bottom:10px;">
+          <h2>사전신청</h2>
+          <p>대표자 연락처로 확정 안내</p>
+        </div>
+
+        <a class="btn" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">네이버폼 사전신청 바로가기</a>
+
+        <div class="hint">
+          관람석 200석은 사전신청을 통한 선예약으로 진행됩니다. 신청 시 대표자 연락처로 확정 문자가 발송됩니다.<br />
+          행사 당일 공연장 우선 입장과 좌석 안내를 도와드리며, 지정좌석제가 아님을 안내드립니다.<br />
+          신청기간은 사전예약좌석 200석 마감까지이며, 사전신청 외 당일 현장접수로도 관람 가능합니다.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTICE -->
+  <section id="notice">
+    <div class="section-title">
+      <h2>공연 안내</h2>
+      <p>공지용 문구 기준으로 정리</p>
+    </div>
+
+    <div class="card card-pad">
+      <div class="prose">
+        <p style="margin-top:0;">
+          2026년 1월 31일 토요일 17시에 천안시청소년복합커뮤니티센터에서 준비한 ‘박상진 첫 번째 피리 독주회’가 1층 대공연장에서 개최됩니다.
+        </p>
+        <p>
+          섬세하면서도 힘 있는 피리의 선율을 통해 국악의 진면목을 느낄 수 있는 공연으로 준비되어 있으며, 천안시민·청소년 누구나 무료로 관람 가능합니다.
+        </p>
+        <ul>
+          <li>신청기간: 사전예약좌석 200석 마감까지 (사전신청 외 당일 현장접수로도 관람 가능합니다.)</li>
+          <li>공연일시: 2026. 1. 31. (토) 17시</li>
+          <li>공연장소: 천안시청소년복합커뮤니티센터 1층 대공연장</li>
+          <li>지원방법: 홈페이지 공지사항을 참고하여 네이버폼을 통한 사전신청서 제출</li>
+          <li>문의: 교육사업팀 041-557-0924</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLOIST -->
+  <section id="soloist">
+    <div class="section-title">
+      <h2>독주자</h2>
+      <p>박상진(피리)</p>
+    </div>
+
+    <div class="card card-pad">
+      <div class="solo">
+        <div class="portrait">
+          <img src="profile-park.png" alt="피리 박상진 프로필" />
+        </div>
+        <div class="profile-meta">
+          <h3>박상진</h3>
+          <p class="role">피리 연주자</p>
+
+          <ul class="bullets">
+            <li>본 공연은 ‘박상진 피리 독주회’로 진행됩니다.</li>
+            <li>출연진은 독주회 무대 구성에 참여하는 연주자 및 소리 출연으로 안내드립니다.</li>
+          </ul>
+
+          <div style="height:10px;"></div>
+
+          <div class="prose">
+            <p style="margin:0;">
+              상세 약력 및 곡목 해설은 팜플렛 이미지에서 확인 가능합니다.
+              본 페이지는 모바일에서도 빠르게 확인할 수 있도록 핵심 안내 중심으로 구성됩니다.
+            </p>
+          </div>
+
+          <div style="height:14px;"></div>
+
+          <a class="btn" href="#pamphlet">팜플렛 바로 보기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAST -->
+  <section id="cast">
+    <div class="section-title">
+      <h2>출연진</h2>
+      <p>독주회 참여 출연진</p>
+    </div>
+
+    <div class="cast-grid">
+      <div class="cast">
+        <div class="img"><img src="profile-gayageum.png" alt="가야금 이현주" /></div>
+        <div class="txt">
+          <p class="name">가야금 이현주</p>
+          <p class="inst">가야금</p>
+        </div>
+      </div>
+
+      <div class="cast">
+        <div class="img"><img src="profile-daegum.png" alt="대금 김진수" /></div>
+        <div class="txt">
+          <p class="name">대금 김진수</p>
+          <p class="inst">대금</p>
+        </div>
+      </div>
+
+      <div class="cast">
+        <div class="img"><img src="profile-ajaeng.png" alt="아쟁 김명신" /></div>
+        <div class="txt">
+          <p class="name">아쟁 김명신</p>
+          <p class="inst">아쟁</p>
+        </div>
+      </div>
+
+      <div class="cast">
+        <div class="img"><img src="profile-perc.png" alt="타악 한유림" /></div>
+        <div class="txt">
+          <p class="name">타악 한유림</p>
+          <p class="inst">타악</p>
+        </div>
+      </div>
+
+      <div class="cast">
+        <div class="img"><img src="profile-haegeum.png" alt="해금 조소연" /></div>
+        <div class="txt">
+          <p class="name">해금 조소연</p>
+          <p class="inst">해금</p>
+        </div>
+      </div>
+
+      <div class="cast">
+        <div class="img"><img src="profile-seodo.png" alt="서도소리 박래송" /></div>
+        <div class="txt">
+          <p class="name">서도소리 박래송</p>
+          <p class="inst">서도소리</p>
+        </div>
+      </div>
+
+      <div class="cast">
+        <div class="img"><img src="profile-namdo.png" alt="남도소리 이해원" /></div>
+        <div class="txt">
+          <p class="name">남도소리 이해원</p>
+          <p class="inst">남도소리</p>
+        </div>
+      </div>
+
+      <!-- 빈칸 균형용(필요 시 삭제 가능) -->
+      <div class="cast" style="opacity:.0; pointer-events:none;">
+        <div class="img"></div>
+        <div class="txt">
+          <p class="name"> </p>
+          <p class="inst"> </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAMPHLET -->
+  <section id="pamphlet">
+    <div class="section-title">
+      <h2>팜플렛</h2>
+      <p>이미지 클릭 시 확대됩니다.</p>
+    </div>
+
+    <div class="pam-grid">
+      <div class="pam" data-zoom="pamphlet-a.png" aria-label="팜플렛 A 확대">
+        <img src="pamphlet-a.png" alt="팜플렛 A" />
+        <div class="cap">팜플렛 A · 클릭하여 확대</div>
+      </div>
+
+      <div class="pam" data-zoom="pamphlet-b.png" aria-label="팜플렛 B 확대">
+        <img src="pamphlet-b.png" alt="팜플렛 B" />
+        <div class="cap">팜플렛 B · 클릭하여 확대</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section id="map">
+    <div class="section-title">
+      <h2>장소·지도</h2>
+      <p>버튼으로 지도를 열 수 있습니다.</p>
+    </div>
+
+    <div class="card card-pad">
+      <div class="info-list">
+        <div class="info-item">
+          <small>공연 장소</small>
+          <b>천안시청소년복합커뮤니티센터 1층 대공연장</b>
+        </div>
+        <div class="info-item">
+          <small>공연 일시</small>
+          <b>2026. 1. 31. (토) 17시</b>
+        </div>
+        <div class="info-item">
+          <small>문의</small>
+          <b>교육사업팀 041-557-0924</b>
+        </div>
+      </div>
+
+      <div style="height:12px;"></div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" href="https://share.google/PLM9vvExnBpZjyDOo" target="_blank" rel="noopener">지도 보기</a>
+        <a class="btn" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청 바로가기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPONSOR -->
+  <section id="sponsor">
+    <div class="section-title">
+      <h2>후원·제작</h2>
+      <p>로고는 동일 높이로 정렬됩니다.</p>
+    </div>
+
+    <div class="card card-pad">
+      <div class="logos">
+        <div class="logo"><img src="logo-cheonanfoundation.png" alt="천안문화재단" /></div>
+        <div class="logo"><img src="logo-youthhub.png" alt="천안시청소년복합커뮤니티센터" /></div>
+        <div class="logo"><img src="logo-theheungcompany.png" alt="더흥컴퍼니" /></div>
+        <div class="logo"><img src="logo-clartwork.png" alt="CL artwork" /></div>
+      </div>
+
+      <div style="height:14px;"></div>
+
+      <div class="prose" style="margin:0;">
+        본 공연은 2025년도 천안문화재단 문화예술보조금을 지원받은 사업입니다.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    박상진 첫 번째 피리 독주회 안내 페이지<br/>
+    문의: 교육사업팀 041-557-0924
+  </footer>
+
+</main>
+
+<!-- Zoom Modal -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="이미지 확대 보기">
+  <div class="box">
+    <button class="close" id="modalClose" aria-label="닫기">✕</button>
+    <img id="modalImg" src="" alt="확대 이미지" />
+  </div>
+</div>
+
+<script>
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const mnav = document.getElementById('mnav');
+
+  hamburger?.addEventListener('click', () => {
+    const open = mnav.style.display === 'block';
+    mnav.style.display = open ? 'none' : 'block';
+    hamburger.setAttribute('aria-expanded', String(!open));
+  });
+
+  // Close mobile nav after click
+  mnav?.addEventListener('click', (e) => {
+    const t = e.target;
+    if (t && t.tagName === 'A') {
+      mnav.style.display = 'none';
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      if (!href || href.length < 2) return;
+      const el = document.querySelector(href);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Zoom modal for pamphlets (and can be extended)
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+  const modalClose = document.getElementById('modalClose');
+
+  document.querySelectorAll('[data-zoom]').forEach(box => {
+    box.addEventListener('click', () => {
+      const src = box.getAttribute('data-zoom');
+      if (!src) return;
+      modalImg.src = src;
+      modal.classList.add('open');
+    });
+  });
+
+  const closeModal = () => {
+    modal.classList.remove('open');
+    modalImg.src = '';
+  };
+
+  modalClose?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
 </body>
 </html>
