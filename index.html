@@ -160,6 +160,8 @@
       line-break: strict;
       white-space: normal;
     }
+    .inviteText p{margin:0}
+    .inviteText p + p{margin-top:10px}
 
     /* Info rows */
     .kv{
@@ -171,103 +173,72 @@
     .kv .v{font-weight:840; font-size:16px; line-height:1.35; color: rgba(255,255,255,.92)}
     .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
 
-    /* Cast layout: poster처럼 "독주자(좌) + 출연진(우)" 느낌을 모바일에 맞게 재현 */
-/* Cast (thumbnail version) */
+    /* Cast (thumbnail version) */
+    .castWrap{display:grid; gap:14px;}
 
-.castWrap{
-  display:grid;
-  gap:14px;
-}
+    .soloLine{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius:18px;
+    }
+    .soloThumb{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      flex:0 0 auto;
+    }
+    .soloThumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .soloName{font-weight:900; font-size:16px; line-height:1.2;}
+    .soloRole{color: rgba(255,255,255,.70); font-weight:760; font-size:13px; margin-top:4px;}
 
-.soloLine{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  padding:12px;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.04);
-  border-radius:18px;
-}
+    .castGrid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:10px;
+    }
+    .castItem{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      min-height:70px;
+    }
+    .castThumb{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      flex:0 0 auto;
+    }
+    .castThumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .castName{font-weight:880; font-size:14px; line-height:1.2;}
+    .castRole{color: rgba(255,255,255,.70); font-weight:760; font-size:12.5px; margin-top:4px;}
 
-.soloThumb{
-  width:54px;
-  height:54px;
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.05);
-  flex:0 0 auto;
-}
-
-.soloThumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.soloName{
-  font-weight:900;
-  font-size:16px;
-  line-height:1.2;
-}
-
-.soloRole{
-  color: rgba(255,255,255,.70);
-  font-weight:760;
-  font-size:13px;
-  margin-top:4px;
-}
-
-.castGrid{
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap:10px;
-}
-
-.castItem{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  padding:12px;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.04);
-}
-
-.castThumb{
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.05);
-  flex:0 0 auto;
-}
-
-.castThumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.castName{
-  font-weight:880;
-  font-size:14px;
-  line-height:1.2;
-}
-
-.castRole{
-  color: rgba(255,255,255,.70);
-  font-weight:760;
-  font-size:12.5px;
-  margin-top:4px;
-}
-
-@media (max-width:520px){
-  .castGrid{grid-template-columns:1fr;}
-}
+    @media (max-width:520px){
+      .castGrid{grid-template-columns:1fr;}
+    }
 
     /* Map */
     .mapBox{
@@ -341,9 +312,11 @@
       <!-- 2. 모시는 글 -->
       <div class="card inviteCard">
         <div class="inner-pad">
-          <p class="inviteText">
-            박상진의 첫 번째 피리 독주회 〈흥〉에 여러분을 초대합니다. 숨결을 어떻게 담아내느냐에 따라 전혀 다른 결을 들려주는 피리의 소리를, 첫 독주회 무대에서 정성껏 펼쳐 보이겠습니다. 부담 없이 오셔서 편안한 마음으로 감상해 주시면 감사하겠습니다.
-          </p>
+          <div class="inviteText">
+            <p>박상진의 첫 번째 피리 독주회 〈흥〉에 여러분을 초대한다.</p>
+            <p>숨결을 어떻게 담아내느냐에 따라 전혀 다른 결을 들려주는 피리의 소리를, 첫 독주회 무대에서 정성껏 펼쳐 보이고자 한다.</p>
+            <p>부담 없이 오셔서 편안한 마음으로 감상해 주시기 바란다.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -375,31 +348,61 @@
       </div>
     </section>
 
-    <!-- 4. 출연진 (포스터의 구성 순서처럼: 독주자 먼저, 그 다음 출연진) -->
+    <!-- 4. 출연진 (독주자 + 2열 카드) -->
     <section class="section" id="cast">
       <h2>출연진</h2>
 
       <div class="castWrap">
 
-        <div class="castBlock">
-          <div class="castHead">독주자</div>
-          <div class="soloItem">
-            <span class="soloName">박상진</span>
-            <span class="soloRole">피리</span>
+        <div class="soloLine">
+          <div class="soloThumb">
+            <img src="profile-park.png" alt="박상진" />
+          </div>
+          <div>
+            <div class="soloName">박상진</div>
+            <div class="soloRole">피리</div>
           </div>
         </div>
 
-        <div class="castBlock">
-          <div class="castHead">출연진</div>
-          <div class="castGrid">
-            <div class="castCell"><span class="castName">박나현</span><span class="castRole">경기소리</span></div>
-            <div class="castCell"><span class="castName">박래송</span><span class="castRole">서도소리</span></div>
-            <div class="castCell"><span class="castName">이해원</span><span class="castRole">남도소리</span></div>
-            <div class="castCell"><span class="castName">조소연</span><span class="castRole">해금</span></div>
-            <div class="castCell"><span class="castName">김명신</span><span class="castRole">아쟁</span></div>
-            <div class="castCell"><span class="castName">이현주</span><span class="castRole">가야금</span></div>
-            <div class="castCell"><span class="castName">김진수</span><span class="castRole">대금</span></div>
-            <div class="castCell"><span class="castName">한유림</span><span class="castRole">타악</span></div>
+        <div class="castGrid">
+          <div class="castItem">
+            <div class="castThumb"><img src="profile-gyeonggi.png" alt="박나현" /></div>
+            <div><div class="castName">박나현</div><div class="castRole">경기소리</div></div>
+          </div>
+
+          <div class="castItem">
+            <div class="castThumb"><img src="profile-seodo.png" alt="박래송" /></div>
+            <div><div class="castName">박래송</div><div class="castRole">서도소리</div></div>
+          </div>
+
+          <div class="castItem">
+            <div class="castThumb"><img src="profile-namdo.png" alt="이해원" /></div>
+            <div><div class="castName">이해원</div><div class="castRole">남도소리</div></div>
+          </div>
+
+          <div class="castItem">
+            <div class="castThumb"><img src="profile-haegeum.png" alt="조소연" /></div>
+            <div><div class="castName">조소연</div><div class="castRole">해금</div></div>
+          </div>
+
+          <div class="castItem">
+            <div class="castThumb"><img src="profile-ajaeng.png" alt="김명신" /></div>
+            <div><div class="castName">김명신</div><div class="castRole">아쟁</div></div>
+          </div>
+
+          <div class="castItem">
+            <div class="castThumb"><img src="profile-gayageum.png" alt="이현주" /></div>
+            <div><div class="castName">이현주</div><div class="castRole">가야금</div></div>
+          </div>
+
+          <div class="castItem">
+            <div class="castThumb"><img src="profile-daegum.png" alt="김진수" /></div>
+            <div><div class="castName">김진수</div><div class="castRole">대금</div></div>
+          </div>
+
+          <div class="castItem">
+            <div class="castThumb"><img src="profile-perc.png" alt="한유림" /></div>
+            <div><div class="castName">한유림</div><div class="castRole">타악</div></div>
           </div>
         </div>
 
