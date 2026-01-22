@@ -172,58 +172,102 @@
     .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
 
     /* Cast layout: poster처럼 "독주자(좌) + 출연진(우)" 느낌을 모바일에 맞게 재현 */
-    .castWrap{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:12px;
-    }
-    .castBlock{
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
-    }
-    .castHead{
-      padding:12px 14px;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      font-weight:860;
-      letter-spacing:-.2px;
-      color: rgba(255,255,255,.86);
-    }
-    .soloItem{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px 14px;
-    }
-    .soloName{font-weight:900; font-size:16px; letter-spacing:-.2px;}
-    .soloRole{color: rgba(255,255,255,.72); font-weight:780; font-size:13.5px; white-space:nowrap;}
+/* Cast (thumbnail version) */
 
-    .castGrid{
-      padding:12px 12px 14px;
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:10px;
-    }
-    .castCell{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:12px 12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      min-height:44px;
-    }
-    .castName{font-weight:860; letter-spacing:-.2px;}
-    .castRole{color: rgba(255,255,255,.70); font-weight:760; font-size:13.5px; white-space:nowrap;}
+.castWrap{
+  display:grid;
+  gap:14px;
+}
 
-    @media (max-width: 360px){
-      .castGrid{grid-template-columns: 1fr;}
-    }
+.soloLine{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:12px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  border-radius:18px;
+}
+
+.soloThumb{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+  flex:0 0 auto;
+}
+
+.soloThumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.soloName{
+  font-weight:900;
+  font-size:16px;
+  line-height:1.2;
+}
+
+.soloRole{
+  color: rgba(255,255,255,.70);
+  font-weight:760;
+  font-size:13px;
+  margin-top:4px;
+}
+
+.castGrid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:10px;
+}
+
+.castItem{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding:12px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+}
+
+.castThumb{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+  flex:0 0 auto;
+}
+
+.castThumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.castName{
+  font-weight:880;
+  font-size:14px;
+  line-height:1.2;
+}
+
+.castRole{
+  color: rgba(255,255,255,.70);
+  font-weight:760;
+  font-size:12.5px;
+  margin-top:4px;
+}
+
+@media (max-width:520px){
+  .castGrid{grid-template-columns:1fr;}
+}
 
     /* Map */
     .mapBox{
