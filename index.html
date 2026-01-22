@@ -10,7 +10,7 @@
     :root{
       --bg:#070b14;
       --panel:rgba(255,255,255,.06);
-      --panel2:rgba(255,255,255,.08);
+      --panel2:rgba(255,255,255,.04);
       --line:rgba(255,255,255,.10);
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.68);
@@ -27,19 +27,19 @@
     html,body{height:100%}
     body{
       margin:0;
-      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 40% -120px, rgba(90,140,230,.32), transparent 60%),
-        radial-gradient(900px 520px at 90% 40%, rgba(80,130,220,.18), transparent 60%),
+        radial-gradient(1200px 600px at 40% -120px, rgba(90,140,230,.30), transparent 60%),
+        radial-gradient(900px 520px at 90% 40%, rgba(80,130,220,.16), transparent 60%),
         linear-gradient(180deg, #070b14, #050810 60%, #04060c);
       letter-spacing:-.2px;
     }
 
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:18px 16px 48px}
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px 16px 56px}
 
-    /* Top bar */
+    /* Topbar */
     .topbar{
       position:sticky; top:0; z-index:30;
       backdrop-filter: blur(14px);
@@ -66,17 +66,18 @@
       border:1px solid rgba(255,255,255,.10);
       display:flex; align-items:center; justify-content:center;
       overflow:hidden;
+      flex:0 0 auto;
     }
     .brand .mark img{width:100%; height:100%; object-fit:cover}
     .brand .txt{min-width:0}
     .brand .title{
-      font-weight:760;
+      font-weight:820;
       font-size:15px;
       line-height:1.15;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-      max-width:44vw;
+      max-width:58vw;
     }
     .brand .sub{
       font-size:12px;
@@ -85,7 +86,7 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-      max-width:44vw;
+      max-width:58vw;
     }
     .top-actions{margin-left:auto; display:flex; align-items:center; gap:10px}
     .btn{
@@ -95,10 +96,9 @@
       background: rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.10);
       color:var(--text);
-      font-weight:700;
+      font-weight:750;
       font-size:13px;
       line-height:1;
-      box-shadow: none;
       transition:.15s ease;
       cursor:pointer;
       user-select:none;
@@ -109,50 +109,12 @@
       border-color: rgba(120,170,255,.42);
     }
     .btn.primary:hover{background: rgba(120,170,255,.28)}
-    .btn.icon{
-      width:42px; height:42px; padding:0;
-      border-radius:999px;
-      font-size:18px;
-    }
-
-    /* Drawer */
-    .drawer-back{
-      position:fixed; inset:0; z-index:50;
-      background: rgba(0,0,0,.42);
-      display:none;
-    }
-    .drawer{
-      position:fixed; right:14px; top:64px; z-index:60;
-      width:min(320px, calc(100vw - 28px));
-      background: rgba(12,16,28,.94);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:16px;
-      box-shadow: var(--shadow);
-      display:none;
-      overflow:hidden;
-    }
-    .drawer .head{
-      padding:14px 14px 10px;
-      font-weight:800;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      color:rgba(255,255,255,.88);
-    }
-    .drawer a{
-      display:block;
-      padding:12px 14px;
-      border-bottom:1px solid rgba(255,255,255,.06);
-      color:rgba(255,255,255,.88);
-      font-weight:700;
-      font-size:14px;
-    }
-    .drawer a:last-child{border-bottom:none}
-    .drawer a:hover{background: rgba(255,255,255,.06)}
 
     /* Sections */
     .section{margin-top:18px}
     .section h2{
       margin:0 0 12px;
-      font-size:22px;
+      font-size:20px;
       letter-spacing:-.3px;
       font-weight:860;
     }
@@ -192,24 +154,32 @@
       background: rgba(0,0,0,.22);
       border-top:1px solid rgba(255,255,255,.10);
       align-items:center;
-      justify-content:space-between;
+      justify-content:flex-end;
+      flex-wrap:wrap;
     }
-    .heroPoster .tools .left{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .heroPoster .tools .right{
-      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+
+    /* 모바일: 포스터 절대 안 자르기 */
+    @media (max-width: 640px){
+      .heroPoster .img{
+        aspect-ratio: auto;
+        height: auto;
+      }
+      .heroPoster img{
+        height: auto;
+        object-fit: contain;
+        background:#0b1020;
+      }
     }
 
     /* Info rows */
     .kv{
       display:grid;
-      grid-template-columns: 120px 1fr;
+      grid-template-columns: 110px 1fr;
       gap:10px 12px;
     }
     .kv .k{
       color: var(--muted2);
-      font-weight:750;
+      font-weight:760;
       font-size:13px;
     }
     .kv .v{
@@ -218,125 +188,53 @@
       line-height:1.35;
       color: rgba(255,255,255,.92);
     }
-
     .desc{
       margin:0;
       color: rgba(255,255,255,.78);
       font-size:15px;
-      line-height:1.7;
+      line-height:1.75;
       font-weight:620;
     }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 12px;
-      border-radius:999px;
-      background: rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.10);
-      color: rgba(255,255,255,.78);
-      font-weight:760;
-      font-size:13px;
-      letter-spacing:-.2px;
-      white-space:nowrap;
+
+    /* Cast list */
+    .castList{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
-    .headRow{
+    .castItem{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:14px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .castName{
+      font-weight:860;
+      letter-spacing:-.2px;
+    }
+    .castRole{
+      color: rgba(255,255,255,.70);
+      font-weight:760;
+      font-size:13.5px;
+      white-space:nowrap;
     }
 
+    /* Buttons row */
     .btnRow{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       margin-top:14px;
     }
-    .btnRow .btn{flex:1 1 140px}
 
-    /* Pamphlets */
-    .pamGrid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:14px;
-    }
-    .pamItem{
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
-    }
-    .pamItem .img{
-      width:100%;
-      background:#0b1020;
-    }
-    .pamItem img{
-      width:100%;
-      height:auto;
-      display:block;
-    }
-    .pamItem .tools{
-      padding:14px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      border-top:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.20);
-    }
-
-    /* Profiles */
-    .profileGrid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:14px;
-    }
-    .profileCard{
-      display:grid;
-      grid-template-columns: 160px 1fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    .profileCard .ph{
-      border-radius: 18px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      min-height:160px;
-    }
-    .profileCard .ph img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .profileCard .meta{
-      padding:6px 0;
-    }
-    .profileCard .name{
-      font-size:18px;
-      font-weight:900;
-      margin:0;
-      letter-spacing:-.4px;
-    }
-    .profileCard .role{
-      margin:6px 0 10px;
-      color: var(--muted);
-      font-weight:740;
-      font-size:13px;
-    }
-    .profileCard .bul{
-      margin:0;
-      padding-left:16px;
-      color: rgba(255,255,255,.76);
-      font-weight:620;
-      line-height:1.75;
-      font-size:14px;
-    }
-
-    /* Map embed */
+    /* Map */
     .mapBox{
       border-radius: 18px;
       overflow:hidden;
@@ -352,42 +250,12 @@
       font-size:13px;
       background: rgba(0,0,0,.18);
     }
-    .mapBox .body{
-      padding:0;
-    }
-    /* Kakao roughmap container: make responsive */
     .root_daum_roughmap{
       width:100% !important;
       max-width:100% !important;
     }
     .root_daum_roughmap .wrap_map{
       width:100% !important;
-    }
-
-    /* Sponsors */
-    .sponsorGrid{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:12px;
-      margin-top:14px;
-    }
-    .sLogo{
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
-      height:92px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:12px;
-    }
-    .sLogo img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      display:block;
-      filter: none;
     }
 
     .foot{
@@ -400,17 +268,9 @@
       text-align:center;
     }
 
-    /* Responsive */
-    @media (min-width: 860px){
-      .pamGrid{grid-template-columns: 1fr 1fr;}
-      .profileGrid{grid-template-columns: 1fr 1fr;}
-      .heroPoster .img{aspect-ratio: 16/8;}
-    }
     @media (max-width: 520px){
-      .brand .title{max-width:52vw}
-      .brand .sub{max-width:52vw}
-      .profileCard{grid-template-columns: 1fr; }
-      .profileCard .ph{min-height:240px}
+      .brand .title{max-width:62vw}
+      .brand .sub{max-width:62vw}
       .kv{grid-template-columns: 92px 1fr;}
     }
   </style>
@@ -422,327 +282,112 @@
     <div class="inner">
       <div class="brand">
         <div class="mark" title="흥">
-          <!-- 좌측 상단 마크: 기존 톤 유지용. 필요 시 교체 가능 -->
           <img src="logo-heung.png" alt="흥" />
         </div>
         <div class="txt">
           <div class="title">박상진 첫 번째 피리 독주회 “흥”</div>
-          <div class="sub">2026. 01. 31. (토) 17:00</div>
+          <div class="sub">2026. 01. 31. (토) 17:00 · 천안시청소년복합커뮤니티센터</div>
         </div>
       </div>
-
       <div class="top-actions">
         <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
-        <button class="btn icon" id="menuBtn" aria-label="메뉴">≡</button>
       </div>
     </div>
   </div>
 
-  <!-- Drawer -->
-  <div class="drawer-back" id="drawerBack"></div>
-  <div class="drawer" id="drawer">
-    <div class="head">바로가기</div>
-    <a href="#poster" class="nav">포스터</a>
-    <a href="#guide" class="nav">공연 안내</a>
-    <a href="#solo" class="nav">독주자</a>
-    <a href="#cast" class="nav">출연진</a>
-    <a href="#pamphlet" class="nav">팜플렛</a>
-    <a href="#place" class="nav">장소·지도</a>
-    <a href="#sponsor" class="nav">후원·제작</a>
-  </div>
-
   <div class="wrap">
 
-    <!-- 1) Poster first -->
+    <!-- Poster -->
     <section class="section" id="poster">
       <div class="heroPoster">
         <div class="img">
           <img src="poster.png" alt="포스터" />
         </div>
         <div class="tools">
-          <div class="left">
-            <span class="badge">박상진 첫 번째 피리 독주회 “흥”</span>
-            <span class="badge">무료 관람</span>
-          </div>
-          <div class="right">
-            <a class="btn" href="poster.png" target="_blank" rel="noopener">원본 크게 보기</a>
-            <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청 바로가기</a>
-          </div>
+          <a class="btn" href="poster.png" target="_blank" rel="noopener">포스터 크게 보기</a>
+          <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
         </div>
       </div>
-    </section>
 
-    <!-- 2) Guide -->
-    <section class="section" id="guide">
-      <div class="card">
-        <div class="inner-pad">
-          <div class="headRow">
-            <h2 style="margin:0;">공연 안내</h2>
-            <span class="badge">2026년 첫 번째 국악콘서트</span>
-          </div>
-
-          <p class="desc" style="margin-bottom:14px;">
-            2026년 1월 31일 토요일 17시에 천안시청소년복합커뮤니티센터에서 준비한 ‘박상진 첫 번째 피리 독주회’가 1층 대공연장에서 개최됩니다. 섬세하면서도 힘 있는 피리의 선율을 통해 국악의 진면목을 느낄 수 있는 공연이며, 천안시민·청소년 누구나 무료로 관람 가능합니다.
+      <!-- Invitation copy -->
+      <div class="card" style="margin-top:14px; background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
+        <div class="inner-pad" style="padding:18px 16px;">
+          <p class="desc" style="margin:0;">
+            박상진의 첫 번째 피리 독주회 〈흥〉에 여러분을 초대합니다.<br/><br/>
+            숨을 어떻게 불어넣느냐에 따라 다른 이야기를 전하는 피리의 소리를, 저의 첫 독주회 무대에 담아보고자 합니다.<br/>
+            부담 없이 오셔서 편안한 마음으로 감상해 주시기 바랍니다.
           </p>
-
-          <div class="card" style="background:rgba(255,255,255,.04); border-color:rgba(255,255,255,.10); box-shadow:none;">
-            <div class="inner-pad" style="padding:16px;">
-              <div class="kv">
-                <div class="k">공연 일시</div>
-                <div class="v">2026. 01. 31. (토) 17:00</div>
-
-                <div class="k">공연 장소</div>
-                <div class="v">천안시청소년복합커뮤니티센터 1층 대공연장</div>
-
-                <div class="k">관람 안내</div>
-                <div class="v">전석 무료 관람</div>
-
-                <div class="k">사전신청</div>
-                <div class="v">네이버폼 접수</div>
-              </div>
-
-              <div class="btnRow">
-                <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청 바로가기</a>
-                <a class="btn" href="#place">장소·지도 보기</a>
-                <a class="btn" href="#pamphlet">팜플렛 보기</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="card" style="margin-top:14px; background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-            <div class="inner-pad" style="padding:16px;">
-              <p class="desc" style="margin:0;">
-                관람석 200석은 사전신청을 통한 선예약으로 진행되며, 신청 시 대표자 연락처로 확정 문자가 발송됩니다. 행사 당일 공연장 우선 입장과 좌석 안내를 진행하며, 지정좌석제가 아님을 안내드립니다. 신청기간은 사전예약좌석 200석 마감까지이며, 사전신청 외에도 당일 현장접수를 통해 관람 가능합니다.
-              </p>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <!-- 3) Soloist -->
-    <section class="section" id="solo">
-      <h2>독주자</h2>
+    <!-- Info -->
+    <section class="section" id="info">
+      <h2>공연 정보</h2>
       <div class="card">
         <div class="inner-pad">
-          <div class="profileCard">
-            <div class="ph">
-              <!-- 독주자 사진(현재 페이지에 보이는 이미지 파일이 있으면 교체 가능) -->
-              <img src="profile-park.png" alt="박상진" />
-            </div>
-            <div class="meta">
-              <p class="name">박상진</p>
-              <p class="role">피리 연주자</p>
-              <ul class="bul">
-                <li>본 공연은 ‘박상진 첫 번째 피리 독주회’로 진행됩니다.</li>
-                <li>출연진은 독주회 무대 구성에 참여하는 연주자 및 소리 출연으로 안내드립니다.</li>
-                <li>상세 약력 및 곡목 해설은 팜플렛 이미지에서 확인 가능합니다.</li>
-              </ul>
-            </div>
+          <div class="kv">
+            <div class="k">일시</div>
+            <div class="v">2026. 01. 31. (토) 17:00</div>
+
+            <div class="k">장소</div>
+            <div class="v">천안시청소년복합커뮤니티센터 1층 대공연장</div>
+
+            <div class="k">관람</div>
+            <div class="v">전석 무료</div>
+
+            <div class="k">신청</div>
+            <div class="v">네이버폼 사전신청</div>
+          </div>
+
+          <div class="btnRow">
+            <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
+            <a class="btn" href="#place">지도 보기</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4) Cast -->
+    <!-- Cast -->
     <section class="section" id="cast">
       <h2>출연진</h2>
       <div class="card">
         <div class="inner-pad">
-          <div class="profileGrid">
+          <ul class="castList">
+            <!-- 아래 항목의 '이름'만 실제 출연진으로 교체하면 됨 -->
+            <li class="castItem"><span class="castName">박상진</span><span class="castRole">피리</span></li>
 
-            <div class="card" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-              <div class="inner-pad">
-                <div class="profileCard" style="grid-template-columns:140px 1fr;">
-                  <div class="ph" style="min-height:140px;">
-                    <img src="profile-seodo.png" alt="서도소리" />
-                  </div>
-                  <div class="meta">
-                    <p class="name">서도소리</p>
-                    <p class="role">소리</p>
-                    <ul class="bul"><li>자세한 곡목·해설은 팜플렛에서 확인 가능합니다.</li></ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">경기소리</span></li>
+            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">서도소리</span></li>
+            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">남도소리</span></li>
 
-            <div class="card" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-              <div class="inner-pad">
-                <div class="profileCard" style="grid-template-columns:140px 1fr;">
-                  <div class="ph" style="min-height:140px;">
-                    <img src="profile-namdo.png" alt="남도소리" />
-                  </div>
-                  <div class="meta">
-                    <p class="name">남도소리</p>
-                    <p class="role">소리</p>
-                    <ul class="bul"><li>자세한 곡목·해설은 팜플렛에서 확인 가능합니다.</li></ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">해금</span></li>
+            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">아쟁</span></li>
+            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">가야금</span></li>
 
-            <div class="card" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-              <div class="inner-pad">
-                <div class="profileCard" style="grid-template-columns:140px 1fr;">
-                  <div class="ph" style="min-height:140px;">
-                    <img src="profile-park.png" alt="피리" />
-                  </div>
-                  <div class="meta">
-                    <p class="name">피리</p>
-                    <p class="role">관악</p>
-                    <ul class="bul"><li>자세한 곡목·해설은 팜플렛에서 확인 가능합니다.</li></ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-              <div class="inner-pad">
-                <div class="profileCard" style="grid-template-columns:140px 1fr;">
-                  <div class="ph" style="min-height:140px;">
-                    <img src="profile-perc.png" alt="타악" />
-                  </div>
-                  <div class="meta">
-                    <p class="name">타악</p>
-                    <p class="role">타악</p>
-                    <ul class="bul"><li>자세한 곡목·해설은 팜플렛에서 확인 가능합니다.</li></ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-              <div class="inner-pad">
-                <div class="profileCard" style="grid-template-columns:140px 1fr;">
-                  <div class="ph" style="min-height:140px;">
-                    <img src="profile-haegeum.png" alt="해금" />
-                  </div>
-                  <div class="meta">
-                    <p class="name">해금</p>
-                    <p class="role">현악</p>
-                    <ul class="bul"><li>자세한 곡목·해설은 팜플렛에서 확인 가능합니다.</li></ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-              <div class="inner-pad">
-                <div class="profileCard" style="grid-template-columns:140px 1fr;">
-                  <div class="ph" style="min-height:140px;">
-                    <img src="profile-daegum.png" alt="대금" />
-                  </div>
-                  <div class="meta">
-                    <p class="name">대금</p>
-                    <p class="role">관악</p>
-                    <ul class="bul"><li>자세한 곡목·해설은 팜플렛에서 확인 가능합니다.</li></ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-              <div class="inner-pad">
-                <div class="profileCard" style="grid-template-columns:140px 1fr;">
-                  <div class="ph" style="min-height:140px;">
-                    <img src="profile-ajaeng.png" alt="아쟁" />
-                  </div>
-                  <div class="meta">
-                    <p class="name">아쟁</p>
-                    <p class="role">현악</p>
-                    <ul class="bul"><li>자세한 곡목·해설은 팜플렛에서 확인 가능합니다.</li></ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-              <div class="inner-pad">
-                <div class="profileCard" style="grid-template-columns:140px 1fr;">
-                  <div class="ph" style="min-height:140px;">
-                    <img src="profile-gayageum.png" alt="가야금" />
-                  </div>
-                  <div class="meta">
-                    <p class="name">가야금</p>
-                    <p class="role">현악</p>
-                    <ul class="bul"><li>자세한 곡목·해설은 팜플렛에서 확인 가능합니다.</li></ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 빠졌던 경기소리 복구 -->
-            <div class="card" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-              <div class="inner-pad">
-                <div class="profileCard" style="grid-template-columns:140px 1fr;">
-                  <div class="ph" style="min-height:140px;">
-                    <img src="profile-park.png" alt="경기소리" />
-                  </div>
-                  <div class="meta">
-                    <p class="name">경기소리</p>
-                    <p class="role">소리</p>
-                    <ul class="bul"><li>자세한 곡목·해설은 팜플렛에서 확인 가능합니다.</li></ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
+            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">대금</span></li>
+            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">타악</span></li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- 5) Pamphlets -->
-    <section class="section" id="pamphlet">
-      <h2>팜플렛</h2>
-      <div class="card">
-        <div class="inner-pad">
-          <div class="pamGrid">
-            <div class="pamItem">
-              <div class="img">
-                <img src="pamphlet-a.png" alt="팜플렛 A" />
-              </div>
-              <div class="tools">
-                <a class="btn" href="pamphlet-a.png" target="_blank" rel="noopener">원본 크게 보기</a>
-              </div>
-            </div>
-
-            <div class="pamItem">
-              <div class="img">
-                <img src="pamphlet-b.png" alt="팜플렛 B" />
-              </div>
-              <div class="tools">
-                <a class="btn" href="pamphlet-b.png" target="_blank" rel="noopener">원본 크게 보기</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6) Place / Map -->
+    <!-- Place / Map -->
     <section class="section" id="place">
-      <h2>장소·지도</h2>
+      <h2>장소·문의</h2>
       <div class="card">
         <div class="inner-pad">
           <div class="kv">
-            <div class="k">공연 일시</div>
-            <div class="v">2026. 01. 31. (토) 17:00</div>
-
-            <div class="k">공연 장소</div>
+            <div class="k">장소</div>
             <div class="v">천안시청소년복합커뮤니티센터 1층 대공연장</div>
 
             <div class="k">문의</div>
             <div class="v">천안시청소년복합커뮤니티센터 교육사업팀 041-557-0924</div>
           </div>
 
-          <!-- 지도는 "바로 보이게" 고정 노출 -->
           <div class="mapBox">
             <div class="cap">카카오맵</div>
             <div class="body">
-              <!-- 1) 지도 노드 -->
               <div id="daumRoughmapContainer1768955363444" class="root_daum_roughmap root_daum_roughmap_landing"></div>
             </div>
           </div>
@@ -751,32 +396,9 @@
             <a class="btn" href="https://share.google/PLM9vvExnBpZjyDOo" target="_blank" rel="noopener">구글지도</a>
             <a class="btn" href="https://naver.me/FO9IHhwr" target="_blank" rel="noopener">네이버지도</a>
             <a class="btn" href="https://kko.to/K3atBsuhh0" target="_blank" rel="noopener">카카오맵</a>
-            <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청 바로가기</a>
-            <a class="btn" href="tel:041-557-0924">문의 전화 연결</a>
+            <a class="btn primary" href="https://naver.me/xcA1pVbg" target="_blank" rel="noopener">사전신청</a>
+            <a class="btn" href="tel:041-557-0924">문의 전화</a>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7) Sponsors -->
-    <section class="section" id="sponsor">
-      <div class="card">
-        <div class="inner-pad">
-          <div class="headRow">
-            <h2 style="margin:0;">후원·제작</h2>
-            <span class="badge">로고는 동일 높이로 정렬하였습니다.</span>
-          </div>
-
-          <div class="sponsorGrid">
-            <div class="sLogo"><img src="logo-cheonanfoundation.png" alt="천안문화재단" /></div>
-            <div class="sLogo"><img src="logo-youthhub.png" alt="천안시청소년복합커뮤니티센터" /></div>
-            <div class="sLogo"><img src="logo-theheungcompany.png" alt="더흥컴퍼니" /></div>
-            <div class="sLogo"><img src="logo-clartwork.png" alt="CLartwork" /></div>
-          </div>
-
-          <p class="desc" style="margin-top:14px;">
-            본 공연은 2025년도 천안문화재단 문화예술보조금을 지원받은 사업입니다.
-          </p>
 
           <div class="foot">
             박상진 첫 번째 피리 독주회 “흥” 안내 페이지<br/>
@@ -792,7 +414,6 @@
   <!-- Kakao Roughmap Loader: 페이지에 1회만 -->
   <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
   <script charset="UTF-8">
-    // Kakao map render
     try{
       new daum.roughmap.Lander({
         "timestamp" : "1768955363444",
@@ -801,27 +422,6 @@
         "mapHeight" : "360"
       }).render();
     }catch(e){}
-
-    // Drawer
-    const menuBtn = document.getElementById('menuBtn');
-    const drawer = document.getElementById('drawer');
-    const back = document.getElementById('drawerBack');
-    const closeDrawer = () => {
-      drawer.style.display = 'none';
-      back.style.display = 'none';
-    };
-    const openDrawer = () => {
-      drawer.style.display = 'block';
-      back.style.display = 'block';
-    };
-    menuBtn?.addEventListener('click', () => {
-      if (drawer.style.display === 'block') closeDrawer();
-      else openDrawer();
-    });
-    back?.addEventListener('click', closeDrawer);
-    document.querySelectorAll('.drawer .nav').forEach(a=>{
-      a.addEventListener('click', ()=> setTimeout(closeDrawer, 0));
-    });
   </script>
 </body>
 </html>
