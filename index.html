@@ -33,7 +33,6 @@
         linear-gradient(180deg, #070b14, #050810 60%, #04060c);
       letter-spacing:-.2px;
     }
-
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:18px 16px 56px}
 
@@ -68,12 +67,12 @@
     .brand .title{
       font-weight:820; font-size:15px; line-height:1.15;
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-      max-width:58vw;
+      max-width:62vw;
     }
     .brand .sub{
       font-size:12px; color:var(--muted); margin-top:2px;
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-      max-width:58vw;
+      max-width:62vw;
     }
     .top-actions{margin-left:auto; display:flex; align-items:center; gap:10px}
     .btn{
@@ -124,14 +123,12 @@
     }
     .heroPoster .img{
       width:100%;
-      aspect-ratio: 16/10;
       background:#0b1020;
       position:relative;
     }
     .heroPoster img{
       width:100%;
-      height:100%;
-      object-fit:cover;
+      height:auto;
       display:block;
     }
     .heroPoster .tools{
@@ -145,17 +142,23 @@
       flex-wrap:wrap;
     }
 
-    /* 모바일: 포스터 절대 안 자르기 */
-    @media (max-width: 640px){
-      .heroPoster .img{
-        aspect-ratio: auto;
-        height: auto;
-      }
-      .heroPoster img{
-        height: auto;
-        object-fit: contain;
-        background:#0b1020;
-      }
+    /* Invite */
+    .inviteCard{
+      margin-top:14px;
+      background: rgba(255,255,255,.03);
+      border-color: rgba(255,255,255,.08);
+      box-shadow:none;
+    }
+    .inviteText{
+      margin:0;
+      color: rgba(255,255,255,.82);
+      font-size:15px;
+      line-height:1.85;
+      font-weight:640;
+      letter-spacing:-.2px;
+      word-break: keep-all;
+      line-break: strict;
+      white-space: normal;
     }
 
     /* Info rows */
@@ -166,31 +169,61 @@
     }
     .kv .k{color: var(--muted2); font-weight:760; font-size:13px}
     .kv .v{font-weight:840; font-size:16px; line-height:1.35; color: rgba(255,255,255,.92)}
-    .desc{margin:0; color: rgba(255,255,255,.78); font-size:15px; line-height:1.75; font-weight:620}
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
 
-    /* Cast list */
-    .castList{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+    /* Cast layout: poster처럼 "독주자(좌) + 출연진(우)" 느낌을 모바일에 맞게 재현 */
+    .castWrap{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
     }
-    .castItem{
+    .castBlock{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    .castHead{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      font-weight:860;
+      letter-spacing:-.2px;
+      color: rgba(255,255,255,.86);
+    }
+    .soloItem{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      padding:12px 14px;
+      padding:14px 14px;
+    }
+    .soloName{font-weight:900; font-size:16px; letter-spacing:-.2px;}
+    .soloRole{color: rgba(255,255,255,.72); font-weight:780; font-size:13.5px; white-space:nowrap;}
+
+    .castGrid{
+      padding:12px 12px 14px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:10px;
+    }
+    .castCell{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 12px;
       border-radius:16px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
+      min-height:44px;
     }
-    .castName{font-weight:860; letter-spacing:-.2px}
-    .castRole{color: rgba(255,255,255,.70); font-weight:760; font-size:13.5px; white-space:nowrap}
+    .castName{font-weight:860; letter-spacing:-.2px;}
+    .castRole{color: rgba(255,255,255,.70); font-weight:760; font-size:13.5px; white-space:nowrap;}
 
-    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    @media (max-width: 360px){
+      .castGrid{grid-template-columns: 1fr;}
+    }
 
     /* Map */
     .mapBox{
@@ -222,8 +255,8 @@
     }
 
     @media (max-width: 520px){
-      .brand .title{max-width:62vw}
-      .brand .sub{max-width:62vw}
+      .brand .title{max-width:66vw}
+      .brand .sub{max-width:66vw}
       .kv{grid-template-columns: 92px 1fr;}
     }
   </style>
@@ -249,6 +282,7 @@
 
   <div class="wrap">
 
+    <!-- 1. 포스터 -->
     <section class="section" id="poster">
       <div class="heroPoster">
         <div class="img">
@@ -260,17 +294,17 @@
         </div>
       </div>
 
-      <div class="card" style="margin-top:14px; background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
-        <div class="inner-pad" style="padding:18px 16px;">
-          <p class="desc" style="margin:0;">
-            박상진의 첫 번째 피리 독주회 〈흥〉에 여러분을 초대합니다.<br/><br/>
-            숨을 어떻게 불어넣느냐에 따라 다른 이야기를 전하는 피리의 소리를, 저의 첫 독주회 무대에 담아보고자 합니다.<br/>
-            부담 없이 오셔서 편안한 마음으로 감상해 주시기 바랍니다.
+      <!-- 2. 모시는 글 -->
+      <div class="card inviteCard">
+        <div class="inner-pad">
+          <p class="inviteText">
+            박상진의 첫 번째 피리 독주회 〈흥〉에 여러분을 초대합니다. 숨결을 어떻게 담아내느냐에 따라 전혀 다른 결을 들려주는 피리의 소리를, 첫 독주회 무대에서 정성껏 펼쳐 보이겠습니다. 부담 없이 오셔서 편안한 마음으로 감상해 주시면 감사하겠습니다.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- 3. 공연 정보 -->
     <section class="section" id="info">
       <h2>공연 정보</h2>
       <div class="card">
@@ -297,28 +331,38 @@
       </div>
     </section>
 
+    <!-- 4. 출연진 (포스터의 구성 순서처럼: 독주자 먼저, 그 다음 출연진) -->
     <section class="section" id="cast">
       <h2>출연진</h2>
-      <div class="card">
-        <div class="inner-pad">
-          <ul class="castList">
-            <li class="castItem"><span class="castName">박상진</span><span class="castRole">피리</span></li>
 
-            <li class="castItem"><span class="castName">박나현</span><span class="castRole">경기소리</span></li>
-            <li class="castItem"><span class="castName">박래송</span><span class="castRole">서도소리</span></li>
-            <li class="castItem"><span class="castName">이해원</span><span class="castRole">남도소리</span></li>
+      <div class="castWrap">
 
-            <li class="castItem"><span class="castName">조소연</span><span class="castRole">해금</span></li>
-            <li class="castItem"><span class="castName">김명신</span><span class="castRole">아쟁</span></li>
-            <li class="castItem"><span class="castName">이현주</span><span class="castRole">가야금</span></li>
-
-            <li class="castItem"><span class="castName">김진수</span><span class="castRole">대금</span></li>
-            <li class="castItem"><span class="castName">한유림</span><span class="castRole">타악</span></li>
-          </ul>
+        <div class="castBlock">
+          <div class="castHead">독주자</div>
+          <div class="soloItem">
+            <span class="soloName">박상진</span>
+            <span class="soloRole">피리</span>
+          </div>
         </div>
+
+        <div class="castBlock">
+          <div class="castHead">출연진</div>
+          <div class="castGrid">
+            <div class="castCell"><span class="castName">박나현</span><span class="castRole">경기소리</span></div>
+            <div class="castCell"><span class="castName">박래송</span><span class="castRole">서도소리</span></div>
+            <div class="castCell"><span class="castName">이해원</span><span class="castRole">남도소리</span></div>
+            <div class="castCell"><span class="castName">조소연</span><span class="castRole">해금</span></div>
+            <div class="castCell"><span class="castName">김명신</span><span class="castRole">아쟁</span></div>
+            <div class="castCell"><span class="castName">이현주</span><span class="castRole">가야금</span></div>
+            <div class="castCell"><span class="castName">김진수</span><span class="castRole">대금</span></div>
+            <div class="castCell"><span class="castName">한유림</span><span class="castRole">타악</span></div>
+          </div>
+        </div>
+
       </div>
     </section>
 
+    <!-- 5. 장소·문의 -->
     <section class="section" id="place">
       <h2>장소·문의</h2>
       <div class="card">
