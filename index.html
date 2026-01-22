@@ -15,11 +15,9 @@
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.68);
       --muted2:rgba(255,255,255,.55);
-      --accent:rgba(120,170,255,.95);
       --accent2:rgba(120,170,255,.22);
       --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius:22px;
-      --radius2:18px;
       --max:980px;
     }
 
@@ -55,10 +53,7 @@
       align-items:center;
       gap:12px;
     }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      min-width:0;
-    }
+    .brand{display:flex; align-items:center; gap:10px; min-width:0}
     .brand .mark{
       width:34px; height:34px;
       border-radius:10px;
@@ -71,21 +66,13 @@
     .brand .mark img{width:100%; height:100%; object-fit:cover}
     .brand .txt{min-width:0}
     .brand .title{
-      font-weight:820;
-      font-size:15px;
-      line-height:1.15;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      font-weight:820; font-size:15px; line-height:1.15;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
       max-width:58vw;
     }
     .brand .sub{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:2px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      font-size:12px; color:var(--muted); margin-top:2px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
       max-width:58vw;
     }
     .top-actions{margin-left:auto; display:flex; align-items:center; gap:10px}
@@ -177,24 +164,9 @@
       grid-template-columns: 110px 1fr;
       gap:10px 12px;
     }
-    .kv .k{
-      color: var(--muted2);
-      font-weight:760;
-      font-size:13px;
-    }
-    .kv .v{
-      font-weight:840;
-      font-size:16px;
-      line-height:1.35;
-      color: rgba(255,255,255,.92);
-    }
-    .desc{
-      margin:0;
-      color: rgba(255,255,255,.78);
-      font-size:15px;
-      line-height:1.75;
-      font-weight:620;
-    }
+    .kv .k{color: var(--muted2); font-weight:760; font-size:13px}
+    .kv .v{font-weight:840; font-size:16px; line-height:1.35; color: rgba(255,255,255,.92)}
+    .desc{margin:0; color: rgba(255,255,255,.78); font-size:15px; line-height:1.75; font-weight:620}
 
     /* Cast list */
     .castList{
@@ -215,24 +187,10 @@
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
     }
-    .castName{
-      font-weight:860;
-      letter-spacing:-.2px;
-    }
-    .castRole{
-      color: rgba(255,255,255,.70);
-      font-weight:760;
-      font-size:13.5px;
-      white-space:nowrap;
-    }
+    .castName{font-weight:860; letter-spacing:-.2px}
+    .castRole{color: rgba(255,255,255,.70); font-weight:760; font-size:13.5px; white-space:nowrap}
 
-    /* Buttons row */
-    .btnRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
 
     /* Map */
     .mapBox{
@@ -250,13 +208,8 @@
       font-size:13px;
       background: rgba(0,0,0,.18);
     }
-    .root_daum_roughmap{
-      width:100% !important;
-      max-width:100% !important;
-    }
-    .root_daum_roughmap .wrap_map{
-      width:100% !important;
-    }
+    .root_daum_roughmap{width:100% !important; max-width:100% !important}
+    .root_daum_roughmap .wrap_map{width:100% !important}
 
     .foot{
       margin-top:18px;
@@ -277,7 +230,6 @@
 </head>
 
 <body>
-  <!-- Topbar -->
   <div class="topbar">
     <div class="inner">
       <div class="brand">
@@ -297,7 +249,6 @@
 
   <div class="wrap">
 
-    <!-- Poster -->
     <section class="section" id="poster">
       <div class="heroPoster">
         <div class="img">
@@ -309,7 +260,6 @@
         </div>
       </div>
 
-      <!-- Invitation copy -->
       <div class="card" style="margin-top:14px; background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
         <div class="inner-pad" style="padding:18px 16px;">
           <p class="desc" style="margin:0;">
@@ -321,7 +271,6 @@
       </div>
     </section>
 
-    <!-- Info -->
     <section class="section" id="info">
       <h2>공연 정보</h2>
       <div class="card">
@@ -348,31 +297,28 @@
       </div>
     </section>
 
-    <!-- Cast -->
     <section class="section" id="cast">
       <h2>출연진</h2>
       <div class="card">
         <div class="inner-pad">
           <ul class="castList">
-            <!-- 아래 항목의 '이름'만 실제 출연진으로 교체하면 됨 -->
             <li class="castItem"><span class="castName">박상진</span><span class="castRole">피리</span></li>
 
-            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">경기소리</span></li>
-            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">서도소리</span></li>
-            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">남도소리</span></li>
+            <li class="castItem"><span class="castName">박나현</span><span class="castRole">경기소리</span></li>
+            <li class="castItem"><span class="castName">박래송</span><span class="castRole">서도소리</span></li>
+            <li class="castItem"><span class="castName">이해원</span><span class="castRole">남도소리</span></li>
 
-            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">해금</span></li>
-            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">아쟁</span></li>
-            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">가야금</span></li>
+            <li class="castItem"><span class="castName">조소연</span><span class="castRole">해금</span></li>
+            <li class="castItem"><span class="castName">김명신</span><span class="castRole">아쟁</span></li>
+            <li class="castItem"><span class="castName">이현주</span><span class="castRole">가야금</span></li>
 
-            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">대금</span></li>
-            <li class="castItem"><span class="castName">이름 입력</span><span class="castRole">타악</span></li>
+            <li class="castItem"><span class="castName">김진수</span><span class="castRole">대금</span></li>
+            <li class="castItem"><span class="castName">한유림</span><span class="castRole">타악</span></li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Place / Map -->
     <section class="section" id="place">
       <h2>장소·문의</h2>
       <div class="card">
@@ -411,7 +357,6 @@
 
   </div>
 
-  <!-- Kakao Roughmap Loader: 페이지에 1회만 -->
   <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
   <script charset="UTF-8">
     try{
