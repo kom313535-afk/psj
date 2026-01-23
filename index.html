@@ -51,6 +51,7 @@
       display:flex;
       align-items:center;
       gap:12px;
+      min-width:0;
     }
     .brand{display:flex; align-items:center; gap:10px; min-width:0}
     .brand .mark{
@@ -74,7 +75,14 @@
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
       max-width:62vw;
     }
-    .top-actions{margin-left:auto; display:flex; align-items:center; gap:10px}
+    .top-actions{
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:0 0 auto;
+    }
+
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       padding:11px 14px;
@@ -88,6 +96,8 @@
       transition:.15s ease;
       cursor:pointer;
       user-select:none;
+      white-space:nowrap; /* 모바일에서 '사전신청' 쪼개짐 방지 */
+      flex:0 0 auto;
     }
     .btn:hover{background: rgba(255,255,255,.10)}
     .btn.primary{
@@ -158,10 +168,8 @@
       letter-spacing:-.2px;
       word-break: keep-all;
       line-break: strict;
-      white-space: normal;
+      white-space: pre-line; /* 문단 줄바꿈 깔끔하게 */
     }
-    .inviteText p{margin:0}
-    .inviteText p + p{margin-top:10px}
 
     /* Info rows */
     .kv{
@@ -173,8 +181,8 @@
     .kv .v{font-weight:840; font-size:16px; line-height:1.35; color: rgba(255,255,255,.92)}
     .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
 
-    /* Cast (thumbnail version) */
-    .castWrap{display:grid; gap:14px;}
+    /* Cast (독주자 + 2열 출연진 + 얼굴 썸네일) */
+    .castWrap{display:grid; gap:14px}
 
     .soloLine{
       display:flex;
@@ -186,26 +194,21 @@
       border-radius:18px;
     }
     .soloThumb{
-      width:54px;
-      height:54px;
+      width:56px; height:56px;
       border-radius:16px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.05);
       flex:0 0 auto;
     }
-    .soloThumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .soloName{font-weight:900; font-size:16px; line-height:1.2;}
-    .soloRole{color: rgba(255,255,255,.70); font-weight:760; font-size:13px; margin-top:4px;}
+    .soloThumb img{width:100%; height:100%; object-fit:cover; display:block}
+    .soloMeta{min-width:0}
+    .soloName{font-weight:900; font-size:16px; line-height:1.2}
+    .soloRole{color: rgba(255,255,255,.72); font-weight:760; font-size:13px; margin-top:4px}
 
     .castGrid{
       display:grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap:10px;
     }
     .castItem{
@@ -216,29 +219,70 @@
       border-radius:18px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
-      min-height:70px;
+      min-width:0;
     }
     .castThumb{
-      width:44px;
-      height:44px;
+      width:46px; height:46px;
       border-radius:14px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.05);
       flex:0 0 auto;
     }
-    .castThumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .castName{font-weight:880; font-size:14px; line-height:1.2;}
-    .castRole{color: rgba(255,255,255,.70); font-weight:760; font-size:12.5px; margin-top:4px;}
+    .castThumb img{width:100%; height:100%; object-fit:cover; display:block}
+    .castMeta{min-width:0}
+    .castName{font-weight:880; font-size:14px; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    .castRole{color: rgba(255,255,255,.70); font-weight:760; font-size:12.5px; margin-top:4px; white-space:nowrap}
 
-    @media (max-width:520px){
-      .castGrid{grid-template-columns:1fr;}
+    /* Pamphlet flip */
+    .flipCard{
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      overflow:hidden;
+      margin-top:14px;
+      box-shadow:none;
     }
+    .flipTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.16);
+    }
+    .flipTop .label{font-weight:860; color: rgba(255,255,255,.85); font-size:14px}
+    .flipBtns{display:flex; gap:8px; flex-wrap:wrap}
+    .flipStage{
+      perspective: 1200px;
+      padding:14px;
+    }
+    .flipBook{
+      position:relative;
+      width:100%;
+      max-width:720px;
+      margin:0 auto;
+      aspect-ratio: 16 / 9;
+    }
+    .flipPage{
+      position:absolute;
+      inset:0;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+      backface-visibility:hidden;
+      transform-style:preserve-3d;
+      transition: transform .55s ease;
+    }
+    .flipPage img{width:100%; height:100%; object-fit:cover; display:block}
+
+    .flipPage.front{transform: rotateY(0deg)}
+    .flipPage.back{transform: rotateY(-180deg)}
+    .flipBook.isFlipped .front{transform: rotateY(180deg)}
+    .flipBook.isFlipped .back{transform: rotateY(0deg)}
 
     /* Map */
     .mapBox{
@@ -270,9 +314,24 @@
     }
 
     @media (max-width: 520px){
-      .brand .title{max-width:66vw}
-      .brand .sub{max-width:66vw}
+      .brand .title{max-width:56vw}
+      .brand .sub{max-width:56vw}
       .kv{grid-template-columns: 92px 1fr;}
+
+      /* 포스터 하단 버튼 2개를 같은 폭으로 */
+      .heroPoster .tools{justify-content:space-between}
+      .heroPoster .tools .btn{flex:1 1 0; padding:12px 12px}
+
+      /* 출연진: 모바일에서도 2열 유지 */
+      .castGrid{grid-template-columns: repeat(2, minmax(0, 1fr));}
+
+      /* 상단바 버튼이 길어져도 줄바꿈하지 않게 */
+      .top-actions .btn{padding:11px 12px}
+    }
+
+    @media (max-width: 360px){
+      /* 초소형에서만 1열로 떨어뜨림(정말 작은 기기) */
+      .castGrid{grid-template-columns: 1fr;}
     }
   </style>
 </head>
@@ -309,13 +368,34 @@
         </div>
       </div>
 
-      <!-- 2. 모시는 글 -->
+      <!-- 2. 모시는 글 (문단 줄바꿈) -->
       <div class="card inviteCard">
         <div class="inner-pad">
-          <div class="inviteText">
-            <p>박상진의 첫 번째 피리 독주회 〈흥〉에 여러분을 초대합니다.</p>
-            <p>숨결을 어떻게 담아내느냐에 따라 전혀 다른 결을 들려주는 피리, 이번 첫 독주회 무대에서 펼쳐 보이고자 합니다.</p>
-            <p>부담 없이 오셔서 편안한 마음으로 감상해 주시기 바랍니다.</p>
+          <p class="inviteText">박상진의 첫 번째 피리 독주회 〈흥〉에 여러분을 초대합니다.
+
+숨결을 어떻게 담아내느냐에 따라 전혀 다른 결을 들려주는 피리의 소리를, 첫 독주회 무대에서 정성껏 펼쳐 보이겠습니다.
+
+부담 없이 오셔서 편안한 마음으로 감상해 주시면 감사하겠습니다.</p>
+        </div>
+      </div>
+
+      <!-- 2-1. 팜플렛 미리보기 (넘기기 느낌) -->
+      <div class="flipCard" id="pamphlet">
+        <div class="flipTop">
+          <div class="label">팜플렛 미리보기</div>
+          <div class="flipBtns">
+            <button class="btn" type="button" id="flipPrev">앞면</button>
+            <button class="btn primary" type="button" id="flipNext">넘기기</button>
+          </div>
+        </div>
+        <div class="flipStage">
+          <div class="flipBook" id="flipBook">
+            <div class="flipPage front">
+              <img src="pamphlet-a.png" alt="팜플렛 앞면" />
+            </div>
+            <div class="flipPage back">
+              <img src="pamphlet-b.png" alt="팜플렛 뒷면" />
+            </div>
           </div>
         </div>
       </div>
@@ -348,7 +428,7 @@
       </div>
     </section>
 
-    <!-- 4. 출연진 (독주자 + 2열 카드) -->
+    <!-- 4. 출연진: 독주자(1) + 출연진(2열 8명) + 얼굴 썸네일 -->
     <section class="section" id="cast">
       <h2>출연진</h2>
 
@@ -358,51 +438,75 @@
           <div class="soloThumb">
             <img src="profile-park.png" alt="박상진" />
           </div>
-          <div>
+          <div class="soloMeta">
             <div class="soloName">박상진</div>
-            <div class="soloRole">피리</div>
+            <div class="soloRole">독주자 · 피리</div>
           </div>
         </div>
 
         <div class="castGrid">
           <div class="castItem">
             <div class="castThumb"><img src="profile-gyeonggi.png" alt="박나현" /></div>
-            <div><div class="castName">박나현</div><div class="castRole">경기소리</div></div>
+            <div class="castMeta">
+              <div class="castName">박나현</div>
+              <div class="castRole">경기소리</div>
+            </div>
           </div>
 
           <div class="castItem">
             <div class="castThumb"><img src="profile-seodo.png" alt="박래송" /></div>
-            <div><div class="castName">박래송</div><div class="castRole">서도소리</div></div>
+            <div class="castMeta">
+              <div class="castName">박래송</div>
+              <div class="castRole">서도소리</div>
+            </div>
           </div>
 
           <div class="castItem">
             <div class="castThumb"><img src="profile-namdo.png" alt="이해원" /></div>
-            <div><div class="castName">이해원</div><div class="castRole">남도소리</div></div>
+            <div class="castMeta">
+              <div class="castName">이해원</div>
+              <div class="castRole">남도소리</div>
+            </div>
           </div>
 
           <div class="castItem">
             <div class="castThumb"><img src="profile-haegeum.png" alt="조소연" /></div>
-            <div><div class="castName">조소연</div><div class="castRole">해금</div></div>
+            <div class="castMeta">
+              <div class="castName">조소연</div>
+              <div class="castRole">해금</div>
+            </div>
           </div>
 
           <div class="castItem">
             <div class="castThumb"><img src="profile-ajaeng.png" alt="김명신" /></div>
-            <div><div class="castName">김명신</div><div class="castRole">아쟁</div></div>
+            <div class="castMeta">
+              <div class="castName">김명신</div>
+              <div class="castRole">아쟁</div>
+            </div>
           </div>
 
           <div class="castItem">
             <div class="castThumb"><img src="profile-gayageum.png" alt="이현주" /></div>
-            <div><div class="castName">이현주</div><div class="castRole">가야금</div></div>
+            <div class="castMeta">
+              <div class="castName">이현주</div>
+              <div class="castRole">가야금</div>
+            </div>
           </div>
 
           <div class="castItem">
             <div class="castThumb"><img src="profile-daegum.png" alt="김진수" /></div>
-            <div><div class="castName">김진수</div><div class="castRole">대금</div></div>
+            <div class="castMeta">
+              <div class="castName">김진수</div>
+              <div class="castRole">대금</div>
+            </div>
           </div>
 
           <div class="castItem">
             <div class="castThumb"><img src="profile-perc.png" alt="한유림" /></div>
-            <div><div class="castName">한유림</div><div class="castRole">타악</div></div>
+            <div class="castMeta">
+              <div class="castName">한유림</div>
+              <div class="castRole">타악</div>
+            </div>
           </div>
         </div>
 
@@ -450,6 +554,22 @@
 
   <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
   <script charset="UTF-8">
+    // 팜플렛 넘기기
+    (function(){
+      const book = document.getElementById('flipBook');
+      const next = document.getElementById('flipNext');
+      const prev = document.getElementById('flipPrev');
+
+      function setFlip(isFlip){
+        if(!book) return;
+        book.classList.toggle('isFlipped', !!isFlip);
+      }
+      if(next) next.addEventListener('click', ()=> setFlip(true));
+      if(prev) prev.addEventListener('click', ()=> setFlip(false));
+      if(book) book.addEventListener('click', ()=> setFlip(!book.classList.contains('isFlipped')));
+    })();
+
+    // 카카오 약도
     try{
       new daum.roughmap.Lander({
         "timestamp" : "1768955363444",
